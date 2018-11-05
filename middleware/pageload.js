@@ -24,26 +24,18 @@ export default async function ({route, env, store}) {
   // }
 
   // add the external handler to store
-  if(!store.state.ext_handler || store.state.ext_handler == '') {
-    store.commit('update', {ext_handler: env.ext_handler})
-  }
+  // if(!store.state.ext_handler || store.state.ext_handler == '') {
+  //   store.commit('update', {ext_handler: env.ext_handler})
+  // }
 
-  console.log('pageload:', process.server, process.client, process.static)
+  // console.log('pageload:', process.server, process.client, process.static)
 
   async function loadDataOnServer() {
-    // Load static data
-    // await store.dispatch('loadCytosis', {
-    //   env,
-    //   tableIndex: 'static',
-    // })
-
     // if universal mode, don't load data when not serer
     if(process.mode == 'universal' && !process.server)
       return false;
 
-    // if(process.server) {
-      // checks to prevent over-eager fetching?
-      let staticData, dynamicData, newsData
+      let staticData
       if(!store.state.Content) {
         staticData = store.dispatch('loadCytosis', {
           env,
@@ -51,29 +43,31 @@ export default async function ({route, env, store}) {
         })
       }
 
-      // Load dynamic data
-      // checks to prevent over-eager fetching?
-      // if(!store.state.Organizations)
-      // const cytosis = await store.dispatch('loadCytosis', {
-      if(!store.state.Organizations) {
-        dynamicData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
-          env,
-          tableIndex: 'dynamic',
-        })
-      }
-
-      // newsData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
-      //   env,
-      //   tableIndex: 'news',
-      // })
-
-      // const results = await Promise.all([staticData, dynamicData])
-      return Promise.all([staticData, dynamicData])
-    // }
+      return Promise.all([staticData])
   }
 
   // only do it on server-side
   // static is loaded on client on every page load/refresh, dynamic is only on generation
+  
+  store.dispatch('loadData')
+
+
+  // set the light mode based on time
+
+  const now = new Date
+  const nowHour = now.getHours()
+  // 12pm-7am is moonlight (no lights, pitch dark room)
+  if (nowHour < 7) {
+    store.dispatch('toggleLight',2)
+  }
+  else if (nowHour > 18) {
+    // 6pm-12pm is twilight (evening, lights on)
+    store.dispatch('toggleLight',1)
+  }
+
+  if(env.offline)
+    return undefined
+
   return loadDataOnServer();
 
   // loads once on client; if cytosis exists it'll 

@@ -1,36 +1,16 @@
 <template>
-  <div class="ContentFrame container" id="top" >
-    <Header/>
-<!-- 
-    <div class="_margin-bottom" v-if="searchString">
-      <Directory />
-    </div>
+  <div class="container" :class="`--${lightModeVal}`" id="top" >
+    <div class="content-top _relative" >
 
-    <div class="_margin-bottom" v-if="!searchString">
-      <nuxt/>
-    </div>
- -->
-    <div class="_width-content-max _margin-center _margin-bottom" >
-      <nuxt/>
-    </div>
-
-    <div class="Signup-container _width-content-max _grid-3-2 _margin-bottom">
-      <div class="Mailchimp-container">
-        <Mailchimp class="footer _height-100"/>
-      </div>
-      <div class="AlertSignup-container">
-        <AlertSignup class="_height-100" :description="true" />
+      <Header/>
+      <div class="_width-content-max _margin-center _margin-bottom" >
+        <nuxt/>
       </div>
     </div>
 
-    <no-ssr>
-      {{ initDrift }}
-    </no-ssr>
-
-    <!-- <no-ssr placeholder="Loading..."> -->
-    <no-ssr>
-      <Policy/>
-    </no-ssr>
+    <!-- <no-ssr> -->
+      <!-- <Policy/> -->
+    <!-- </no-ssr> -->
     <Footer/>
   </div>
 </template>
@@ -38,16 +18,14 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import VueScrollTo from 'vue-scrollto'
 
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import Policy from '~/components/Policy.vue'
-import Directory from '~/components/Directory.vue'
 
-import AlertSignup from '~/components/AlertSignup.vue'
-import Mailchimp from '~/components/Mailchimp.vue'
+// import Mailchimp from '~/components/Mailchimp.vue'
 
 
 export default {
@@ -56,14 +34,12 @@ export default {
     Header,
     Footer,
     Policy,
-    AlertSignup,
-    Mailchimp,
-    Directory,
+    // Mailchimp,
   },
 
   head () {
     return {
-      title: this.$store.state.pageName || 'Phage Directory',
+      title: this.$store.state.pageName || 'novel monkey',
     }
   },
 
@@ -127,68 +103,17 @@ export default {
           _this.scrollY = window.scrollY
         }, 200)()
       }
-    }
+    },
 
-    // navigate(event) {
-    //   const href = event.target.getAttribute('href')
-    //   if (href && href[0] === '/') {
-    //     event.preventDefault()
-    //     this.$router.push(href)
-    //   }
-    // },
-    // addListeners() {
-    //   this._links = this.$el.getElementsByTagName('a')
-    //   for (let i = 0; i < this._links.length; i++) {
-    //     this._links[i].addEventListener('click', this.navigate, false)
-    //   }
-    // },
-    // removeListeners() {
-    //   if(this._links) {
-    //     for (let i = 0; i < this._links.length; i++) {
-    //       this._links[i].removeEventListener('click', this.navigate, false)
-    //     }
-    //     this._links = []
-    //   }
-    // }
   },
 
   computed: {
     ...mapState([
       'searchString'
       ]),
-
-    initDrift() {
-      console.log('[Checking drift...]')
-      // drift for drift@phage.directory
-      if(this.$store.state.policy && !this.$store.state.drift && !process.server) {
-        console.log('[Starting drift...]')
-        this.$store.dispatch('updateCreate', {drift: true}
-          )
-        !function() {
-          var t = window.driftt = window.drift = window.driftt || [];
-          if (!t.init) {
-            if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-            t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
-            t.factory = function(e) {
-              return function() {
-                var n = Array.prototype.slice.call(arguments);
-                return n.unshift(e), t.push(n), t;
-              };
-            }, t.methods.forEach(function(e) {
-              t[e] = t.factory(e);
-            }), t.load = function(t) {
-              var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-              o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-              var i = document.getElementsByTagName("script")[0];
-              i.parentNode.insertBefore(o, i);
-            };
-          }
-        }();
-        drift.SNIPPET_VERSION = '0.3.1';
-        drift.load('ks35ggadwzyw');
-      }
-      return undefined
-    }
+    ...mapGetters([
+      'lightModeVal'
+      ]),
   },
 
   created () {

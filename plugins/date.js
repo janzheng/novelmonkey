@@ -7,3 +7,7 @@ Vue.filter('niceDate', function(value) {
     return moment(String(value)).format('MMMM Do, YYYY')
   }
 });
+
+export default ({ app }, inject) => {
+  inject('moment', moment)
+}

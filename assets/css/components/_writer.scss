@@ -1,0 +1,82 @@
+
+
+$writer-width: 640px;
+$writer-padding: $size;
+$writer-radius: $size-half;
+
+.Writer {
+  overflow-anchor: none;
+  min-height: 70vh;
+  position: relative;
+
+  // on the homepage
+  &.--inline {
+    max-width: $writer-width;
+    margin: 0 auto;
+    padding: $size $size-2;
+    border-radius: $writer-radius;
+    background-color: v(writer-bg);
+
+    .Inputter {
+      position: sticky;
+      bottom: $size;
+    }
+
+    .Renderer-menu {
+      position: sticky;
+      top: $size-half;
+    }
+
+  }
+}
+
+
+.Renderer-overlay {
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+
+  // message
+  span {
+    position: sticky;
+    top: 100px;
+    bottom: 100px;
+  }
+
+  &.--show {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.--daylight {
+  .Renderer-overlay {
+    background-color: rgba(usetheme(white, $colors_), 0.92);
+  }
+}
+
+
+// when blank, this is the call to write. also instructions?
+.Renderer-cta {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+

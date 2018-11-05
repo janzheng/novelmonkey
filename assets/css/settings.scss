@@ -6,18 +6,21 @@
  */
 
 
-
-//  Colors
-
 $theme-sizes: (
-  size: 15px,
   size-diff: 0,
   radius: 4px,
 ) !default;
 
 
 
-$size: 15px;
+$size: 16px;
+$size-serif: $size + 6px;
+$lineheight-serif: $size * 1.7;
+
+
+$size-serif-small: $size + 2px;
+$lineheight-serif-small: $size * 2.2;
+
 $font-lineheight: 22px;
 // $font-size-base: 18px;
 
@@ -33,58 +36,21 @@ $z-top: 90;
 
 
 
-$color-phdir: #71EFF5;
-$color-teal: $color-phdir;
-$color-teal-50: rgba($color-phdir,0.5);
-$color-dull: #90D9DD;             
-
-$color-yellow: #FCCB4C;           
-$color-pink: #FA5486;             
-
-$color-gray: #374F6A;             
-// $color-gray-light: #F0F0F0; // specced out, but unusable bc of coeur   
-
-      
-$color-body: $color-phdir;
-$color-main: $color-phdir;        
-$color-secondary: $color-gray;    
-$color-tertiary: $color-pink;     
-
-$color-active: $color-pink;       
-$color-links: $color-pink;         
-$color-body: $color-secondary;    
-// $color-hover: $color-main;
-// $color-active: $color-main;
-
-
-$sidebar-color-link: $color-links;
-
-
-$color-focus: $color-tertiary;
+@import '../../node_modules/coeur/styles/index.scss';
 
 
 
+%font-sans {
+  font-family: 'Poppins', "-apple-system", "BlinkMacSystemFont", "system-ui", "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", "Helvetica", "arial", "sans-serif";
+} ._font-sans {@extend %font-sans;}
 
 
-
-// @include colorate('phdir', $color-phdir);
-// @include colorate('teal', $color-teal);
-// @include colorate('dull', $color-dull);
-// @include colorate('yellow', $color-yellow);
-// @include colorate('pink', $color-pink);
-// @include colorate('gray', $color-gray);
-// @include colorate('gray-light', $color-gray-light);
-// @include colorate('main', $color-main);
-// @include colorate('secondary', $color-secondary);
-// @include colorate('tertiary', $color-tertiary);
-// @include colorate('active', $color-phdir);
-
-
-%focus-pink {
-  // border: solid rgba($color-tertiary, 1) ;
-  // outline: none;
-  // box-shadow: 0px 0px 2px 0px rgba($color-tertiary, 1);
-}
+%font-serif {
+  // replaced EB Garamond with Lora
+  font-family: 'EB Garamond', 'Lora', 'Georgia', 'Garamond', 'Times', serif;
+  -webkit-font-smoothing: auto !important;
+  font-smoothing: auto !important;
+} ._font-serif {@extend %font-serif;}
 
 %font-mono,
 ._font-mono {
@@ -98,12 +64,7 @@ $color-focus: $color-tertiary;
 }
 
 
-$use-cssvars: false;
-
-// $font-serif: "PT Serif", "Georgia", serif;
-// $font-display: "PT Serif", "Georgia", serif;
-
-@import '../../node_modules/coeur/styles/index.scss';
+// $use-cssvars: false;
 
 
 %font-display,
@@ -113,33 +74,46 @@ $use-cssvars: false;
   // font-family: $font-display;
 }
 
+@include addtheme($theme-sizes);
 
+@function color($color, $adjust) {
+  @if ($adjust > 100) {
+    @return darken($color, $adjust - 100 );
+  }
+  @return lighten($color, $adjust );
+}
 
-@include addtheme($theme-sizes)
+$color-blue-light: #F3FBFD;
 
+// contextual colors
+$color-bg: $color-blue-light;
 
-$phdir_: (
-  phdir: #71EFF5,
-  teal: #71EFF5,
-  dull: #90D9DD,
-  yellow: #FCCB4C,
-  pink: #FA5486,
-  gray: #374F6A,
+// color map 
+$novelmonkey: (
+  blue-light: #F3FBFD,
+  blue-dark: #0E1E24,
 );
-@include colorate($phdir_);
+// @include colorate($novelmonkey);
 
 
-$context_: (
-  main: usetheme(phdir, $colors_),
-  secondary: usetheme(gray, $colors_),
-  tertiary: usetheme(pink, $colors_),
+// contextual themes
+$daylight: (
+  bg: usetheme(blue-light, $novelmonkey),
+  footer-bg: color(usetheme(blue-light, $novelmonkey), 110),
+  text: usetheme(teal, $novelmonkey),
 
-  active: usetheme(pink, $colors_),
-  links: usetheme(pink, $colors_),
-  body: usetheme(secondary, $colors_),
+  alert-bg: usetheme(blue-dark, $novelmonkey),
+  alert-txt: usetheme(black, $colors_),
 
+  writer-bg: usetheme(whiter, $colors_),
 );
-@include colorate($context_);
+
+$moonlight: (
+  bg: usetheme(blue, $novelmonkey),
+  footer-bg: color(usetheme(blue-dark, $novelmonkey), 110),
+  text: usetheme(teal, $novelmonkey),
+);
+
 
 
 

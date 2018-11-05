@@ -1,58 +1,33 @@
 <template>
-  <div class="Footer container --antialiased">
-    <section class="_grid-1-2 _align-vertically _padding-top _padding-bottom  _width-content-max _margin-center">
-
-      <div class="Footer-left _center-xs">
-        <!-- <router-link class="" to="/"> -->
-        <router-link to="/" >
-          <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/>
-          <span class="phagedirectory"><span>Phage</span> Directory, </span>
-          <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
-          <span class="_font-small">2017-{{thisYear}}</span>
-        </router-link>
-        <!-- </router-link> -->
-      </div>
-
-      <!-- margin-right is for avoiding the drift box -->
-      <div class="Footer-right _center-xs">
-        <div class="_margin-bottom-half _right-sm _center-xs">
-          <!-- <span class="_margin-right "><router-link to="/mission">Our Mission</router-link></span> -->
-          <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
-          <span class="_margin-right "><router-link to="/contact">Contact Us</router-link></span>
-          <span class="_margin-right "><router-link to="/updates">Updates</router-link></span>
-          <span class=" "><router-link to="/policies">Site Policy</router-link></span>
-        </div>
-        <div class="_right-sm _center-xs">
-          <span class="_margin-right _block-xs _margin-bottom-half-xs">
-            <!-- <i class="fa far fa-envelope _margin-right-half"></i> -->
-            <a target="_blank" href="mailto:hello@phage.directory">hello@phage.directory</a>
-          </span>
-          <span class=" _block-xs ">
-            <!-- <i class="fa far fa-twitter _margin-right-half"></i> -->
-            <a target="_blank" href="https://twitter.com/phagedirectory">@phagedirectory</a>
-          </span>
-          <!-- <span class="_margin-right-half _hidden-xs">
-            <a target="_blank" href="https://twitter.com/phagedirectory"><i class="fa fa-fw far fa-twitter"></i></a>
-          </span>
-          <span class="_hidden-xs">
-            <a target="_blank" href="https://www.facebook.com/phagedirectory"><i class="fa fa-fw far fa-facebook"></i></a>
-          </span> -->
-          <!-- <span>
-            <router-link to="/design#forms">design</router-link>
-          </span> -->
-        </div>
-      </div>
-    </section>
+  <div class="Footer container --antialiased " id="footer">
+    <Logotype class="_padding-top-2 _center _margin-center" />
+    <div class="_width-content-paragraph _margin-center _center _padding-2">
+      <p>novel monkey is experimental, so please back up your work!</p>
+      <p>
+        Read <router-link to="/about">more about this project</router-link>, our <router-link to="/policies">privacy policy and terms of use</router-link>, or tweet at me <a href="https://twitter.com/thenovelmonkey">@thenovelmonkey</a> or email me at <a href="mailto:hello@zeee.co">hello@zeee.co</a>.
+      </p>
+      <p>
+        Please support <a href="https://store.nanowrimo.org/collections/donate/">NaNoWriMo</a>!
+      </p>
+      <p>This is a side project of <a href="http://zeee.co">zeee.co</a>.</p>
+      <p>* this site isn't affiliated with NaNoWriMo</p>
+      
+    </div>
+    <Chimp class="_center _margin-center _margin-bottom-2" />
   </div>
 </template>
 
 
 <script>
 
+import Logotype from '~/components/Logotype'
+import Chimp from '~/components/Chimp'
 
 export default {
 
   components: {
+    Logotype,
+    Chimp
   },
   props: [],
 

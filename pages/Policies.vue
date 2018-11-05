@@ -1,25 +1,16 @@
 <template>
 
-  <div class="Policies container">
-    <!-- header -->
-    <div class="_grid-1-5">
-      <div></div>
-      <article class="narrow" v-html="$md.render(intro || '')"></article>
+  <div class="Policies container narrow _margin-center">
+    <article class="" v-html="$md.render(intro || '')"></article>
+    <!-- body -->
+    <div class="_margin-bottom">
+      <div><router-link to="#terms">Terms of Use</router-link></div>
+      <div><router-link to="#privacy">Privacy Policy</router-link></div>
+      <div><router-link to="#cookies">Cookies Policy</router-link></div>
     </div>
 
-    <!-- body -->
-    <div class="_grid-1-5 _grid-gap-large">
-
-      <div class="SideNav _sidebar">
-        <div class="_sidebar-content">
-          <router-link to="#terms">Terms of Use</router-link>
-          <router-link to="#privacy">Privacy Policy</router-link>
-          <router-link to="#alerts">Phage Alerts</router-link>
-          <router-link to="#cookies">Cookies Policy</router-link>
-        </div>
-      </div>
-
-      <article class="Policies-content narrow">
+    <div class="_margin-bottom-2">
+      <article class="Policies-content">
         <div class="" v-html="$md.render(policies || '')"></div>
       </article>
     </div>

@@ -1,0 +1,18 @@
+
+
+.Chimp {
+  position: relative;
+  width: 60px;
+  .Chimp-container {
+    position: absolute;
+  }
+  .face-left {
+    padding-right: 6px;
+  }
+  .mouth {
+    @include transform(rotate(-90deg));
+    position: absolute;
+    left: 21.5px;
+    bottom: -6px;
+  }
+}

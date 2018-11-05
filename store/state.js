@@ -1,29 +1,24 @@
+
 export default { 
 
+  // keep this flat, helps w/ reactivity
+
+  // system
   ext_handler: '',
   policy: false,
   currentPolicy: false,
-  searchSource: '',
-  searchString: '',
   searchUrl: '',
-  cytosis: {},
-  
-  // test: 'init test',
-  // populate the tables so they can be reactive
-  // Content: {},
-  // Blog: {},
-  // Alerts: {},
-  // Tags: {},
-  // Terms: {},
-  // Phages: {},
-  // Organizations: {},
-  // Labs: {},
-  // People: {},
-  // Hosts: {},
-  // HostFamily: {},
-  // HostGenus: {},
-  // HostSpecies: {},
-  // Classification: {},
-  // Location: {},
-  
+  lightModes: ['daylight','twilight','moonlight'],
+
+  // user settings
+  lightMode: 0,
+   
+  // user session content
+  sessionName: '',
+  session: [], // each session contains many fragment objects
+  sessionCount: 0, // total word count for the session
+  inputString: '', // current, uncommitted string (before hitting enter)
+  inputCount: 0, // current input char count
+
 }
+

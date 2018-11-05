@@ -1,0 +1,173 @@
+
+$color_logo: inherit; // #7ECDF8 !important;
+
+.Logotype {
+  // default is small, text-sized
+  position: relative;
+  white-space: nowrap;
+  
+  .novel {
+    @extend %font-sans;
+    font-weight: 700;
+  }
+  .monkey {
+    @extend %font-serif;
+    .o {
+      position: relative;
+      bottom: 2px;
+    }
+  }
+
+  &.--header {
+    .novel {
+      font-size: $size + 3px;
+    }
+    .monkey {
+      font-size: $size + 6px;
+    }
+  }
+}
+
+// .logotype {
+//   cursor: default;
+//   text-align: center;
+//   color: $color_logo;
+  
+//   * {
+//     position: relative;
+//     display: inline-block;
+//   }
+// }
+
+// .logotype._small {
+
+//   $logo_size-novel: 18px;
+//     $logo_size-novel-spacing: -2px;
+//     $logo-novel-weight: 600;
+//   $logo_size-monkey: 25px;
+//     $logo_size-monkey-spacing: 1.2px;
+//     $logo_size-padding_left: 12px;
+//     $logo-nke-spacing: -2px;
+//     $logo-nke-bottom: -2px;
+//     $logo-nke-left: -1.2px;
+//     $logo-k-left: -2px;
+//     $logo-o-top: -4px;
+//     $logo-o-left: -1px;
+//     $logo-o-before-left: -2px;
+//     $logo-o-before-top: 1px;
+//     $logo-y-top: -2px;
+//     $logo-y-left: -1px;
+
+//   .logotype_novel {
+//     @extend %font-sans;
+//     font-weight: $logo-novel-weight;
+
+//     letter-spacing: $logo_size-novel-spacing;
+//     font-size: $logo_size-novel;
+//   }
+//   .logotype_monkey {
+//     @extend %font-serif;
+//     display: inline-block;
+//     font-size: $logo_size-monkey;
+//     letter-spacing: logo_size-monkey-spacing;
+//     padding-left: $logo_size-padding_left;
+//     // top: -2px;
+
+//     .nke {
+//       letter-spacing: $logo-nke-spacing;
+//       bottom: $logo-nke-bottom;
+//       left: $logo-nke-left;
+//     }
+//     .k {
+//       left: $logo-k-left;
+//     }
+//     .o {
+//       top: $logo-o-top;
+//       left: $logo-o-left;
+
+//       &:before {
+//         content: 'o';
+//         display: block;
+//         position: absolute;
+//         left: $logo-o-left;
+//         top: $logo-o-before-top;
+//       }
+//     }
+//     .y {
+//       left: $logo-y-left;
+//       top: $logo-y-top;
+//     }
+//   }
+// }
+
+
+
+
+
+
+// .logotype {
+
+
+//   $logo_size-novel: 67px;
+//     $logo_size-novel-spacing: -3px;
+//     $logo-novel-weight: 700;
+//   $logo_size-monkey: 89px;
+//     $logo_size-monkey-spacing: 0px;
+//     $logo_size-padding_left: 12px;
+//     $logo-nke-spacing: -4px;
+//     $logo-nke-bottom: -2px;
+//     $logo-nke-left: -4px;
+//     $logo-k-left: -4px;
+//     $logo-o-top: -4px;
+//     $logo-o-left: -1px;
+//     $logo-o-before-left: -1px;
+//     $logo-o-before-top: 2px;
+//     $logo-y-top: -2px;
+//     $logo-y-left: -3px;
+
+
+//   .logotype_novel {
+//     @extend %font-sans;
+//     font-weight: $logo-novel-weight;
+
+//     letter-spacing: $logo_size-novel-spacing;
+//     font-size: $logo_size-novel;
+//   }
+//   .logotype_monkey {
+//     @extend %font-serif;
+//     display: inline-block;
+//     font-size: $logo_size-monkey;
+//     letter-spacing: logo_size-monkey-spacing;
+//     padding-left: $logo_size-padding_left;
+//     // top: -2px;
+
+//     @include screen-xs {
+//       padding-top: $size;
+//     }
+
+//     .nke {
+//       letter-spacing: $logo-nke-spacing;
+//       bottom: $logo-nke-bottom;
+//       left: $logo-nke-left;
+//     }
+//     .k {
+//       left: $logo-k-left;
+//     }
+//     .o {
+//       top: $logo-o-top;
+//       left: $logo-o-left;
+
+//       &:before {
+//         content: 'o';
+//         display: block;
+//         position: absolute;
+//         left: $logo-o-left;
+//         top: $logo-o-before-top;
+//       }
+//     }
+//     .y {
+//       left: $logo-y-left;
+//       top: $logo-y-top;
+//     }
+//   }
+// }

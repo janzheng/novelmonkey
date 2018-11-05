@@ -1,29 +1,13 @@
 <template>
 
-  <ContentFrame class="About">
+  <div class="About _margin-top-2 _margin-bottom-2">
     <section class="narrow copy _margin-center">
-      <h1 class="About-title title">
-        {{aboutTitle}}
-      </h1>
-
       <div class="About-bg">
-        <div class="" v-html="$md.render(aboutBg || '')"></div>
-      </div>
-
-      <div class="About-us">
-        <div class="" v-html="$md.render(aboutUs || '')"></div>
-      </div>
-
-      <div class="About-profile _card _padding">
-        <div class="" v-html="$md.render(jess || '')"></div>
-      </div>
-
-      <div class="About-profile _card _padding">
-        <div class="" v-html="$md.render(jan || '')"></div>
+        <p class="_font-serif" v-html="$md.render(aboutBg || '')"></p>
       </div>
 
     </section>
-  </ContentFrame>
+  </div>
 </template>
 
 <script>
@@ -40,11 +24,7 @@ export default {
   async asyncData({app, env, route, store}) {
     const cytosis = store.state.cytosis
     return {
-      aboutTitle: app.$cytosis.find('Content.about-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
       aboutBg: app.$cytosis.find('Content.about-bg', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      aboutUs: app.$cytosis.find('Content.about-us', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jess: app.$cytosis.find('Content.about-jess', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jan: app.$cytosis.find('Content.about-jan', store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

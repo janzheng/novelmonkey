@@ -39,6 +39,7 @@ export default {
       localStorage.setItem('pd-policy', this.$store.state.currentPolicy)
       this.$store.commit('updatePolicy')
       this.policy = this.$store.state.currentPolicy
+      console.log('accept', this.policy)
     }
   },
 

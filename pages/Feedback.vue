@@ -1,18 +1,18 @@
 <template>
 
   <section class="AnonFeedback container narrow copy _margin-center">
-    <FormVomFeedback />
+    <!-- <FormVomFeedback /> -->
   </section>
 </template>
 
 <script>
 
-import FormVomFeedback from '~/forms/FormVomFeedback.vue'
+// import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 
 export default {
 
   components: {
-    FormVomFeedback
+    // FormVomFeedback
   },
 
   layout: 'contentframe',

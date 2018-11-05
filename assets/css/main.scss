@@ -5,18 +5,61 @@
 
 
 
-%md-sans_serif {
-  // fixing markdown
-  &, *, p {
-    @extend %font-sans;
-    // font-size: 15px;
-    // line-height: 22px;
-  }
+// %md-sans_serif {
+//   // fixing markdown
+//   // &, *, p {
+//   body, html {
+//     @extend %font-sans;
+//     font-size: $size;
+//     line-height: $size * 1.5;
+//   }
+//   p {
+//     @extend %font-serif;
+//   }
+// }
+
+
+body, html {
+  @extend %font-sans;
+  @extend %ease-xslow;
+  font-size: $size;
+  line-height: $size * 1.5;
+  // background-color: usetheme(black, $colors_);
+  background-color: usetheme(blue-dark, $novelmonkey);
 }
 
-body {
-  background-color: $color-gray;
+p, ul {
+  @extend %font-serif;
+  font-size: $size-serif;
+  line-height: $lineheight-serif;
+  // letter-spacing: 0.3px;
 }
+
+:root {
+  // @include themevars($colors_); // add the standard theme to cssvar color list
+
+  .--daylight, .--twilight {
+    @include themevars($daylight);
+
+    &,* {
+      @extend %ease-xslow;
+    }
+  }
+
+  .--moonlight {
+    @include themevars($moonlight);  }
+
+    &,* {
+      @extend %ease-xslow;
+    }
+}
+
+.Box {
+  background-color: v(bg);
+  color: v(text)
+}
+
+
 
 h1 {
   line-height: $font-h1 * 1.0;
@@ -54,7 +97,7 @@ h3 {
     position: absolute;
     left: $offset; bottom: -2px;
     height: $offset/2;
-    background: $color-main;
+    // background: $color-main;
     padding: $offset;
 
     width: 100%;
@@ -82,34 +125,34 @@ h3 {
 // links
 a {
   text-decoration: underline;
-  text-decoration-color: $color-links;
+  // text-decoration-color: $color-links;
   border: 0;
   position: relative;
   // color: $color-green;
   // @extend ._pointer-no_events;
   // @extend %ease-fast;
   &:hover {
-    color: $color-links;
+    // color: $color-links;
   }
 }
 
 
 
 
-p {
-  // font-size: $font-size-base;
-  // line-height: $font-lineheight;
-  @extend %md-sans_serif;
+// p {
+//   // font-size: $font-size-base;
+//   // line-height: $font-lineheight;
+//   @extend %md-sans_serif;
 
-  padding-left: 0;
-  // @extend %font-serif;
+//   padding-left: 0;
+//   // @extend %font-serif;
 
   a {
     font-weight: 700;
     &+a {
     }
   }
-}
+// }
 
 
 ._md--margin-none {

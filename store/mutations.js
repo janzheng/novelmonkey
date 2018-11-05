@@ -1,5 +1,7 @@
 
 import _ from 'lodash'
+import { count, addCommas } from '~/assets/helpers.js'
+
 
 export default { 
 
@@ -135,5 +137,67 @@ export default {
   },
   setCurrentPolicy (state, el) {
     state['currentPolicy'] = el
-  }
+  },
+
+
+  // Novelmonkey mutations
+
+  // sets the current text, plus calculations
+  setInputText (state, el) {
+    state['inputString'] = el
+    state['inputCount'] = count(el)
+  },
+  setSessionName (state, el) {
+    state['sessionName'] = el
+  },
+
+  // reset the current session
+  reset (state) {
+
+    state['session'] = []
+    state['sessionCount'] = 0
+
+    state['inputString'] = ''
+    state['inputCount'] = 0
+  },
+
+  // commits input text into a fragment, and resets the input text
+  updateInput (state) {
+    let fragment = {
+      time: new Date(),
+      string: state['inputString'],
+      count: state['inputCount'],
+      seshId: state.session.length, // used w/ :key
+      // these would all be parsed
+      // tags: [], // #topic — future
+      // refs: [], // @person — future
+      // projects: [], // future
+    }
+    state['session'].push(fragment)
+    state['sessionCount'] += state['inputCount']
+
+    state['inputString'] = ''
+    state['inputCount'] = 0
+  },
+
+  // restores data from an object,
+  // used for loading local data, saved files, indexeddb, and cloud
+  restore (state, data) {
+    state['session'] = data.session || []
+    state['sessionCount'] = data.sessionCount || 0
+    state['sessionName'] = data.sessionName || ''
+  },
+
+  // set reference for text input element
+  // really useful for triggering focus
+  setInputRef (state, el) {
+    state['inputRef'] = el
+  },
+
+
 }
+
+
+
+
+

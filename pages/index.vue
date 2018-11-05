@@ -2,27 +2,11 @@
 
   <div class="Home">
 
-    <section class="Home-intro Home-container copy _padding-2" v-html="$md.render(intro || '')">
-    </section>
-
-    <div class="_padding-left-2">
-      <MailchimpBanner />
+    <div class="Home-intro">
     </div>
-    
-    <section class="Home-container copy _padding-2 _grid-3-1">
-      <div>
-        <FormVomFeedback class=""/>
-      </div>
 
-      <div>
-        <div class="Home-media">
-          <no-ssr>
-            <Twitter />
-          </no-ssr>
-        </div>
-      </div>
-    </section>
- 
+    <Writer class="--inline" :inline="true" />
+
   </div>
 </template>
 
@@ -31,23 +15,13 @@
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
-import Twitter from '~/components/Twitter.vue'
-import FormVomFeedback from '~/forms/FormVomFeedback.vue'
-import Mailchimp from '~/components/Mailchimp.vue'
-import MailchimpBanner from '~/components/MailchimpBanner.vue'
-
 import { mapState } from 'vuex'
-// import Cytosis from 'cytosis'
-// import Cytosis from '~/other/cytosis'
+import Writer from '~/components/Writer'
+
 export default {
 
   components: {
-    ContentFrame,
-    Twitter,
-    FormVomFeedback,
-    Mailchimp,
-    MailchimpBanner,
+    Writer,
   },
 
   layout: 'contentframe',
@@ -62,7 +36,7 @@ export default {
     return {
       postUrl: env.ext_handler,
       cytosis: store.state.cytosis,
-      intro: app.$cytosis.find('Content.home-intro-new', store.state.cytosis.tables)[0]['fields']['Markdown']
+      intro: '', // app.$cytosis.find('Content.home-intro-new', store.state.cytosis.tables)[0]['fields']['Markdown']
     }
   },
 
@@ -112,46 +86,3 @@ export default {
 
 <style>
 </style>
-
-
-
-
-  <!-- 
-          <h1 class="Home-title title">
-            Phage Directory is
-          </h1>
-
-          1. Goal is to make phage therapy a reality
-          2. Science-backed
-          3. Get phage researchers together to improve phage therapy 
-
-          <div class="Home-tag">
-            a directory of researchers 
-            <s>fighting antibiotic resistance with phages.</s>
-
-            Our antibiotics are failing. 
-            People are dying of drug-resistant infections.
-            But there is hope.
-
-            Phage therapy—a way of treating infections with bacteria-killing viruses called bacteriophages—is difficult, personalized, and needs researchers, medical professionals, governments, and families to work together.
-
-            Phage Directory connects the right people to 
-            safely bring the right phages to 
-            patients who need them.
-
-            — @phagedirectory
-
-          </div>
-          <div class="Home-boxes _grid-3">
-            <div>Make phage therapy a reality</div>
-            <div>Towards phage research</div>
-
-            working together to accelerate phage research towards making phage therapy a reality
-          </div>
-
-          Our mission, goals, and how we're getting there
-
-          <div class="_card">
-            Join the fight message
-          </div>
-           -->

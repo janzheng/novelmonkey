@@ -9,17 +9,17 @@
 // https://github.com/joshbuchea/HEAD  https://gethead.info/
 // these are the default social sharing items
 // make sure to use the Head component for generated data
-const site_policy = '1.0.2'
+const site_policy = '1.0.0'
 const site_ga = 'UA-109657404-1' 
-const site_url = 'https://phage.directory'
-const site_name = 'Phage Directory';
-const site_twitter = '@phagedirectory';
+const site_url = 'https://novelmonkey.com'
+const site_name = 'novel monkey';
+const site_twitter = '@novelmonkey';
 const site_twitter_creator = '@janistanian';
 const site_color = '#374F6A';
-const site_title = 'Phage Directory';
-const site_description = 'Phage Directory curates a database of phage labs, phages, and host strains to advance research and phage therapy.';
+const site_title = 'novel monkey';
+const site_description = 'A writing tool that "takes the intimidation away from staring at the blank page".';
 
-const site_ico = '/ico_dull.png';
+const site_ico = '/icon_sm.png';
 const site_image = '/share_img.png';
 const site_search = 'index,follow';
 const site_author = 'Jan Zheng';
@@ -27,16 +27,21 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
-// const mode = 'spa' // 'universal'
-const mode = 'universal' // 'universal'
+const offline = true;//false
+const mode = 'spa' // loads airtable dynamically
+// const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
+
+
 module.exports = {
   // mode: 'universal', // use this for deployment; need to rebuild the site every time airtable content changes
+  offline: offline,
   mode: mode, // for development, or for real-time airtable changes
   env: {
+    offline: offline,
     mode: mode,
     site_fb: site_fb,
     airtable_api: 'keyAe6M1KoPfg25aO',  // cytosisreader@zeee.co handler
-    airtable_base: 'appSCAap8SWbFRtu0',
+    airtable_base: 'app0IDN4GEAPBNEjh',
     site_policy: site_policy,
     ext_handler: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input'
   },
@@ -129,7 +134,8 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: site_ico }, // <link rel="icon" sizes="192x192" href="/path/to/icon.png">
       { rel: 'apple-touch-icon', href: site_ico }, // default resolution is 192x192 <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
       { rel: 'mask-icon',  href: site_ico, color: site_color}, // <link rel="mask-icon" href="/path/to/icon.svg" color="blue"> <!-- Safari Pinned Tab Icon -->
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=PT+Serif' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lora|Poppins:300,400,700' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=EB+Garamond' }
     ],
   },
 
@@ -229,11 +235,19 @@ module.exports = {
     // '~plugins/filters.js',
     // '~plugins/vue-highlightjs.js',
     // { src: '~/plugins/plugintest.js', ssr: false }
+    // { src: '~/plugins/policy.js', ssr: false },
+    // { src: '~/plugins/markdownit' },
+    // ['~/plugins/cytosis'],
+    // ['~/plugins/date'],
+    // { src: '~/plugins/dynamicData.js' } // done as middleware instead
+    
     { src: '~/plugins/policy.js', ssr: false },
+    // { src: '~/plugins/hotjar.js', ssr: false }, // need to link this to policy
     { src: '~/plugins/markdownit.js' },
     { src: '~/plugins/cytosis.js' },
     { src: '~/plugins/date.js' },
-    // { src: '~/plugins/dynamicData.js' } // done as middleware instead
+    { src: '~/plugins/clipboard.js' },
+    { src: '~/plugins/scrollto.js' },
   ],
 
   modules: [
@@ -245,7 +259,42 @@ module.exports = {
     ['@nuxtjs/markdownit', {
       html: true,
     }],
+    ['@nuxtjs/toast', {
+      html: true,
+    }],
+    '@nuxtjs/pwa',
+    // '@nuxtjs/workbox',
+    // '@nuxtjs/manifest',
   ],
+
+  // manifest: {
+  //   name: 'novel monkey',
+  //   short_name: 'novlmnky',
+  //   display: 'standalone',
+  //   start_url: 'https://novelmonkey.surge.sh/',
+  //   theme_color: site_color,
+  //   background_color: '#FFF',
+  //   lang: 'en',
+  //   // icons: PWAIcons
+  // },
+
+  workbox: {
+    runtimeCaching: [
+      {
+          urlPattern: 'https://fonts.googleapis.com/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+      },
+      {
+          urlPattern: 'https://fonts.gstatic.com/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+      },
+    ]
+  },
+
   markdownit: {
     // preset: 'default',
     injected: false, // markdownit.js plugin takes over injection
@@ -264,6 +313,10 @@ module.exports = {
       'markdown-it-attrs',
       ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
     ],
+  },
+
+  toast: { 
+    position: 'top-right' 
   },
 
   build: {
@@ -330,130 +383,8 @@ module.exports = {
         //   path: '/d/:capsid',
         //   component: resolve(__dirname, 'pages/Dir.vue')
         // },
-        {
-          name: 'capsid',
-          path: '/capsid',
-          component: resolve(__dirname, 'pages/News.vue')
-        },
-        {
-          // opens each issue separately, good for deeplinking, possibly comments
-          name: 'capsidIssue',
-          path: '/capsid/:slug',
-          component: resolve(__dirname, 'pages/NewsPage.vue')
-        },
-
-        {
-          name: 'search',
-          path: '/search/:searchstr',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        {
-          name: 'phages',
-          path: '/phages',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        {
-          name: 'hosts',
-          path: '/hosts',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        {
-          name: 'diseases',
-          path: '/diseases',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        {
-          name: 'antibiotics',
-          path: '/antibiotics',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        {
-          name: 'orgs',
-          path: '/orgs',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        {
-          name: 'labs',
-          path: '/labs',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        {
-          name: 'people',
-          path: '/people',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
-        // {
-        //   name: 'apply',
-        //   path: '/projects/:id/apply',
-        //   component: resolve(__dirname, 'pages/ApplyPage.vue')
-        // },
-
-        // news alerts
-        {
-          name: 'alerts',
-          path: '/alerts/:id',
-          component: resolve(__dirname, 'pages/Alerts.vue')
-        },
-
-
-        // blog / news / 'viral' newsletter; resolves to generic Blog page
-        // {
-        //   name: 'Update.item',
-        //   path: '/updates/:slug',
-        //   component: resolve(__dirname, 'pages/Updates.vue')
-        // },
-        // { // split up into the news component
-        //   name: 'News',
-        //   path: '/news',
-        //   component: resolve(__dirname, 'pages/Blog.vue')
-        // },
-        // {
-        //   name: 'News.item',
-        //   path: '/news/:slug',
-        //   component: resolve(__dirname, 'pages/Blog.vue')
-        // },
-        // {
-        //   name: 'Updates',
-        //   path: '/updates',
-        //   component: resolve(__dirname, 'pages/Blog.vue')
-        // },
-        {
-          name: 'Updates.item',
-          path: '/updates/:slug',
-          component: resolve(__dirname, 'pages/Updates.vue')
-        },
-
-
-        // other resolvers
-        {
-          name: 'questions',
-          path: '/questions',
-          component: resolve(__dirname, 'pages/Feedback.vue')
-        },
-        {
-          name: 'legal',
-          path: '/legal',
-          component: resolve(__dirname, 'pages/Policies.vue')
-        },
       )
     },
-    // scrollBehavior(to, from, savedPosition) {
-    //   if (savedPosition) {
-    //     return savedPosition
-    //   } else {
-    //     let position = {}
-    //     if (to.matched.length < 2) {
-    //       position = { x: 0, y: 0 }
-    //     } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
-    //       position = { x: 0, y: 0 }
-    //     }
-    //     if (to.hash) {
-    //       position = { selector: to.hash }
-    //     }
-    //     return position
-    //   }
-    // }
-
   },
   generate: {
     fallback: true, // if you want to use '404.html'
