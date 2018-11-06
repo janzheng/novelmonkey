@@ -10,7 +10,13 @@
 @import '/components/writer';
 
 
-
+button, ._button {
+	&.--text {
+		&:hover {
+			color: v(active) !important; // text color uses --active
+		}
+	}
+}
 
 
 ._content {

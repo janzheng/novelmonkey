@@ -6,7 +6,8 @@
     {{ activeCount }}
 
     <div>
-      <input ref="textInput" v-model.trim="inputString" class="Header-search _form-input --width-full" type="text" name="textInput" id="searchbar" placeholder="Write something magical" @input="textEntry" @keyup.enter="commitFragment"
+      <input ref="textInput" v-model.trim="inputString" class="Header-search _form-input --width-full" type="text" name="textInput" id="searchbar" placeholder="Write something magical" @input="textEntry" 
+      @keydown.enter.prevent="commitFragment"
       @keydown.alt.s.prevent="save"
       @keydown.ctrl.s.prevent="save"
       @keydown.meta.83.prevent="save"
@@ -20,6 +21,7 @@
 <script>
 
 import { mapState, mapGetters } from 'vuex'
+import { scrollToRendererBottom, scrollToFullscreenBottom } from '~/assets/helpers'
 
 export default {
 
@@ -45,21 +47,37 @@ export default {
       // console.log('set text:', text)
     },
 
-    commitFragment() {
+    scronk() {
+      console.log('scronk.')
+      this.$scrollTo('#writer', 1000)
+    },
+
+    commitFragment(e) {
+
       const body = document.body
       const html = document.documentElement
-      const footer = document.getElementById('footer')
+      const footer = document.getElementById('belowRenderer')
 
       // var height = Math.max( body.scrollHeight, body.offsetHeight, 
                          // html.clientHeight, html.scrollHeight, html.offsetHeight );
 
       this.$store.dispatch('commitInput')
 
+      // In-Page input: scroll the page so that the input bar is always visible,
+      // let the content scroll with
       // might be buggy on some browsers; use w/ caution
       // 200 is adjusted height of footer
       // window.scroll(0, height - 280 - window.outerHeight);
       // end number is padding
-      window.scroll(0, footer.offsetTop - window.innerHeight + 32)
+
+
+      if(!this.fullscreen) {
+        scrollToRendererBottom()
+      } else {
+        // when full-screen, scroll the writer element to bottom
+        // this.$store.dispatch('scrollToFullscreenBottom')
+        scrollToFullscreenBottom()
+      }
     },
 
     setFocus() {
@@ -97,6 +115,8 @@ export default {
       'session',
       'inputCount',
       'currentPolicy',
+      'fullscreen',
+      'refWriter'
       ]),
 
     ...mapGetters([

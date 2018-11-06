@@ -153,7 +153,6 @@ export default {
 
   // reset the current session
   reset (state) {
-
     state['session'] = []
     state['sessionCount'] = 0
 
@@ -194,7 +193,31 @@ export default {
     state['inputRef'] = el
   },
 
+  // REFS / DOM setters
+  // sets the writer ref so it can be accessed for full screen
+  
 
+  // set or unset fullscreen mode
+  setFullscreen (state) {
+    state['fullscreen'] = true
+  },
+  setFullscreenOff (state) {
+    state['fullscreen'] = false
+  },
+
+  setExpand (state) {
+    state['expand'] = true
+  },
+  setExpandOff (state) {
+    state['expand'] = false
+  },
+
+  setZen (state) {
+    state['zen'] = true
+  },
+  setZenOff (state) {
+    state['zen'] = false
+  },
 }
 
 

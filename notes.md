@@ -9,7 +9,7 @@ Novelmonkey 3 (vue) Notes
 
 ## Todo
 
-- CSS: import old CSS but w/ new coeur syntax
+- use vue-scrollto instead of window.scroll in the helpers.js for easing
 
 
 ## Design

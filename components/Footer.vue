@@ -1,5 +1,5 @@
 <template>
-  <div class="Footer container --antialiased " id="footer">
+  <div class="Footer container --antialiased " ref="belowRenderer" id="belowRenderer">
     <Logotype class="_padding-top-2 _center _margin-center" />
     <div class="_width-content-paragraph _margin-center _center _padding-2">
       <p>novel monkey is experimental, so please back up your work!</p>
@@ -23,6 +23,8 @@
 import Logotype from '~/components/Logotype'
 import Chimp from '~/components/Chimp'
 
+import { setRefBelowRenderer } from '~/assets/helpers'
+
 export default {
 
   components: {
@@ -30,6 +32,10 @@ export default {
     Chimp
   },
   props: [],
+
+  mounted () {
+    setRefBelowRenderer(this.$refs.belowRenderer)
+  },
 
   computed: {
     thisYear() {

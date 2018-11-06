@@ -4,12 +4,15 @@
     <div class="Header-content _flex-row">
 
 
-      <div class="Header-left">
-        <!-- <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/nmcoin.png"/></router-link> -->
-        <Logotype class="--header" /> <span class="_font-smaller">beta version 3</span>
+      <div class="Header-left _flex-1">
+        <div @click="goHome" class="_pointer">
+          <!-- <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/nmcoin.png"/></router-link> -->
+          <Logotype class="--header" />
+          <span class="_font-smaller">(beta v3)</span>
+        </div>
       </div>
 
-      <div class="_flex-2 _right-sm _width-100">
+      <div class="_flex-1 _right-xs _right-sm">
         <Settings />
       </div>
     </div>
@@ -53,6 +56,9 @@ export default {
   },
 
   methods: {
+    goHome() {
+      this.$router.push('/')
+    },
     search(str) {
       console.log('handling search:',this.searchString)
       // const url = `/search/${this.searchString}`

@@ -10,10 +10,12 @@
 
  -->
 <template>
-  <div class="Writer _flex-col" >
-
-    <Renderer class="_flex-1" :inline="inline" />
-    <Inputter :autofocus="true" :inline="inline"/>
+  <div class="Writer _flex-col" :class="fullscreen ? '--fullScreen' : ''" ref="writer" id="writer">
+    <Renderer class="_flex-1" />
+    <Inputter :autofocus="true" />
+    <div class="yoo">
+      yoooo
+    </div>
 
   </div>
 </template>
@@ -24,6 +26,7 @@
 import { mapState } from 'vuex'
 import Renderer from '~/components/Renderer'
 import Inputter from '~/components/Inputter'
+import { setWriter } from '~/assets/helpers'
 
 export default {
 
@@ -32,22 +35,22 @@ export default {
     Inputter
   },
 
-  props: ['inline'],
+  mounted () {
+    // this.$store.commit('setWriter', this.$refs.writer)
+    setWriter(this.$refs.writer)
+  }, 
 
-  data: function () {
+  data () {
     return {
     }
   },
 
-
   methods: {
-
   },
 
   computed: {
-
-
     ...mapState([
+      'fullscreen'
       ]),
   }
 

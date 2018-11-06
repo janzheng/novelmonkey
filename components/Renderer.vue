@@ -7,23 +7,68 @@
        v-on:dragenter="onDrag"
        v-on:dragover="onDrag"
        v-on:dragleave="onDragLeave"
-       v-on:click="setFocus"
   >
+  <!-- v-on:click="setFocus" -- removed from Renderer since it makes selecting and copying hard -->
     <div class="Renderer-overlay" :class="showOverlay ? '--show' : ''"
     >
       <p>drop the novelmonkey.save file!</p>
     </div>
 
-    <!-- top menu -->
+    <!-- 
+      top menu 
+    -->
+
+    <!-- full screen menu -->
+    <!-- <div class="Renderer-menu _flex-row _right" 
+      :class="hasWritten ? '' : '_opacity-10'"
+      v-on:click="ignoreFocus"
+      v-if="fullscreen"
+    >
+      <div class="_flex-1">
+        <button class="_button --text --short _margin-none _font-small"
+          @click="toggleLightMode"
+        >{{lightModeName}}</button>
+
+        <button class="_button --text --short _margin-none _font-small"
+          @click="closeFullscreen"
+        >close</button>
+      </div>
+    </div> -->
+
+    <!-- regular menu -->
     <div class="Renderer-menu _flex-row _margin-bottom-half _right" 
       :class="hasWritten ? '' : '_opacity-10'"
       v-on:click="ignoreFocus"
     >
-      <div class="_flex-grow">
-        <input v-model.trim="sessionName" />
+      <div class="Renderer-menu-left _flex-grow">
+        <input class="Renderer-name" v-model.trim="sessionName" />
       </div>
 
-      <div class="_flex-1">
+      <div class="Renderer-menu-right _flex-1">
+
+        <button class="_button --text --short _margin-none _font-small"
+          @click="toggleLightMode"
+        >{{lightModeName}}</button>
+
+        <button class="_button --text --short _margin-none _font-small"
+          @click="toggleZen"
+        >{{zenName}}</button>
+
+        <button class="_button --text --short _margin-none _font-small"
+          @click="toggleExpand"
+        >{{ expandName }}</button>
+
+        <button class="_button --text --short _margin-none _font-small"
+          @click="openFullscreen"
+          v-if="!fullscreen"
+        >fullscreen</button>
+
+        <button class="_button --text --short _margin-none _font-small"
+          @click="closeFullscreen"
+          v-if="fullscreen"
+        >exit fullscreen</button>
+
+<!-- 
         <button class="_button --text --short _margin-none _font-small"
           v-clipboard:copy="copyContent"
           v-clipboard:success="copySuccess"
@@ -33,14 +78,20 @@
         <button class="_button --text --short _margin-none _font-small"
         download="novelmonkey.save"
         @click="download"
-        >download</button>
+        >save</button>
 
         <button class="_button --text --short _margin-none _font-small"
         @click="clear"
-        >clear</button>
+        >clear</button> -->
         <!-- {{ hasWritten }} -->
       </div>
     </div>
+
+
+
+
+
+
 
     <!-- session story text content -->
     <div class="Renderer-content" v-if="session.length > 0"
@@ -67,10 +118,9 @@
 <script>
 
 import { mapState, mapGetters } from 'vuex'
+import { fullscreenEnter, fullscreenLeave } from '~/assets/helpers'
 
 export default {
-
-  props: ['inline'],
   
   data: function () {
 
@@ -131,7 +181,6 @@ export default {
       e.stopPropagation()
     },
 
-
     onDrop(e) {
       var files = e.dataTransfer.files;
       e.preventDefault()
@@ -149,6 +198,27 @@ export default {
       this.showOverlay = false
     },
 
+    toggleLightMode() {
+      this.$store.dispatch('toggleLight')
+    },
+
+    openFullscreen() {
+      fullscreenEnter(this)
+    },
+
+    closeFullscreen() {
+      fullscreenLeave(this)
+    },
+
+    toggleZen() {
+      this.$store.dispatch('toggleZen')
+    },
+
+    toggleExpand() {
+      this.$store.dispatch('toggleExpand')
+    },
+
+
   },
 
   computed: {
@@ -157,20 +227,36 @@ export default {
       'session',
       'sessionCount',
       'inputCount',
+      'fullscreen',
+      'lightMode',
+      'expand',
+      'zen',
       ]),
 
     ...mapGetters([
       'hasWritten',
       'activeCount',
+      'lightModeName',
       ]),
+
+    expandName() {
+      if(!this.expand)
+        return "expand"
+      return "shrink"
+    },
+    zenName() {
+      if(!this.zen)
+        return "enter zen"
+      return "leave zen"
+    },
+
 
     sessionName: {
       get: function () {
-        return this.$store.state.sessionName || 'No Name Note'
+        return this.$store.state.sessionName || this.$store.state.defaultName
       },
       // setter
       set: function (str) {
-        // console.log('setting:', str)
         // const url = `/search/${this.searchString}`
         this.$store.commit('setSessionName', str)
       }

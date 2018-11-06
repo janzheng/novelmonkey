@@ -3,13 +3,9 @@
 <template>
   <div class="Chimp">
     <div class="Chimp-container">
-      <span class="face-left">⨴(°</span>
-      <!-- <span class="nose">¨</span> -->
-      <span class="mouth">(</span>
+      <span class="face-left">⨴(°</span><!-- <span class="nose">¨</span> --><span class="mouth">(</span><span class="face-right"><!-- <span class="wink">˜</span> --><span class="eye">°</span><span class="face-right">)⨮</span>
+      </span>
       <!-- <span class="tongue">⩌</span> -->
-      <!-- <span class="wink">˜</span> -->
-      <span class="eye">°</span>
-      <span class="face-right">)⨮</span>
     </div>
   </div>
 </template>

@@ -10,7 +10,7 @@ export default {
     return content
   },
 
-  lightModeVal (state) {
+  lightModeName (state) {
     return state.lightModes[state.lightMode]
   },
 

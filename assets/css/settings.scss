@@ -48,8 +48,9 @@ $z-top: 90;
 %font-serif {
   // replaced EB Garamond with Lora
   font-family: 'EB Garamond', 'Lora', 'Georgia', 'Garamond', 'Times', serif;
-  -webkit-font-smoothing: auto !important;
-  font-smoothing: auto !important;
+  // looks washed out; might be a Mojave thing
+  // -webkit-font-smoothing: auto !important;
+  // font-smoothing: auto !important;
 } ._font-serif {@extend %font-serif;}
 
 %font-mono,
@@ -105,7 +106,17 @@ $daylight: (
   alert-bg: usetheme(blue-dark, $novelmonkey),
   alert-txt: usetheme(black, $colors_),
 
+  // context colors 
+  active: usetheme(red, $colors_),
+
+
+  // renderer colors
+  // paper / text
   writer-bg: usetheme(whiter, $colors_),
+
+  // inputs
+  input-bg: usetheme(silver-lighter, $colors_),
+  input-bg-active: usetheme(silver-light, $colors_),
 );
 
 $moonlight: (

@@ -1,7 +1,27 @@
 
 <template>
   <div>
-    <button class="--text _margin-none" @click="toggleLightMode">{{lightModeVal}}</button>
+
+    <button class="_button --text --short _margin-none _font-small"
+      v-clipboard:copy="copyContent"
+      v-clipboard:success="copySuccess"
+      v-clipboard:error="copyError"
+    >copy to clipboard</button>
+
+    <button class="_button --text --short _margin-none _font-small"
+    download="novelmonkey.save"
+    @click="download"
+    >download</button>
+
+    <button class="_button --text --short _margin-none _font-small"
+    @click="clear"
+    >reset</button>
+
+    <!-- <button class="--text _margin-none" @click="toggleLightMode">{{lightModeName}}</button> -->
+
+    <!-- <button class="--text _margin-none" @click="openFullscreen">full screen</button> -->
+
+        <!-- {{ hasWritten }} -->
 <!-- 
     <button type="button"
       v-clipboard:copy="copyContent"
@@ -19,6 +39,7 @@
 <script>
 
 import { mapState, mapGetters } from 'vuex'
+import { fullscreenEnter } from '~/assets/helpers'
 
 export default {
   data: function () {
@@ -35,7 +56,7 @@ export default {
       ]),
 
     ...mapGetters([
-      'lightModeVal',
+      'lightModeName',
       ]),
 
   },
@@ -66,10 +87,24 @@ export default {
         })
     },
 
+    download() {
+      this.$store.dispatch('generateSave')
+    },
+
+    clear() {
+      if (confirm("Are you sure you want to clear all text?")) {
+        this.$store.dispatch('sessionReset')
+      } 
+    },
+
     toggleLightMode() {
-      console.log('toggle light')
       this.$store.dispatch('toggleLight')
-    }
+    },
+
+    openFullscreen() {
+      fullscreenEnter(this)
+      // this.$store.dispatch('fullscreenEnter', this.$refs.writer)
+    },
   }
 }
 </script>

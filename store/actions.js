@@ -1,5 +1,6 @@
 
 // import Cytosis from 'cytosis'
+import fscreen from 'fscreen'
 import Cytosis from '~/other/cytosis'
 import _ from 'lodash'
 
@@ -78,7 +79,7 @@ export default {
     document.body.appendChild(a)
     a.style = "display: none"
 
-    const sessionName = state.sessionName || 'novelmonkey'
+    const sessionName = state.sessionName || state.defaultName
 
     const url = window.URL.createObjectURL(blob)
       a.href = url
@@ -107,6 +108,14 @@ export default {
       const data = JSON.parse(raw) || {}
       commit('restore', data)
     }
+  },
+
+  // start the session; each session start gets a new start date/time
+  // lets users keep track of sessions
+  // future: add more metrics 
+  // if idle for a while, could make another session start
+  setSessionStart({ state }) {
+    // const now = Date.now()
   },
 
   // reset the localstorage
@@ -138,7 +147,21 @@ export default {
       ref.focus()
     else
       state.inputRef.focus()
-  }
+  },
+
+  toggleExpand({ state, commit }) {
+    if(state['expand'])
+      commit('setExpandOff')
+    else
+      commit('setExpand')
+  },
+  
+  toggleZen({ state, commit }) {
+    if(state['zen'])
+      commit('setZenOff')
+    else
+      commit('setZen')
+  },
 
 }
 

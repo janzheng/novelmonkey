@@ -9,7 +9,44 @@
 
 import _ from 'lodash'
 
-export default async function ({route, env, store}) {
+
+export function loadStatic(env, store, routeName='') {
+  let data
+  if(store.state && !!!store.state.Content) {
+    data = store.dispatch('loadCytosis', {
+      env,
+      tableIndex: 'static',
+      caller: routeName
+    })
+  }
+  return data
+}
+
+async function loadDataOnServer(routeName, store, env) {
+  // Load static data
+  // await store.dispatch('loadCytosis', {
+  //   env,
+  //   tableIndex: 'static',
+  // })
+
+  // if universal mode, don't load data when not server
+  if(process.mode == 'universal' && !process.server)
+    return false;
+
+  console.log('loading cytosis. Data:', `Content:${!!store.state.Content}, Orgs:${!!store.state.Organizations}`)
+  // if(process.server) {
+    // checks to prevent over-eager fetching?
+    let staticData, dynamicData, newsData
+
+    staticData = loadStatic(env, store, routeName)
+
+    return Promise.all([staticData, dynamicData])
+  // }
+}
+
+
+
+export default function ({route, env, store}) {
   const routeName = route.name;
   // console.log('pageload ctx:', context);
 
@@ -24,36 +61,19 @@ export default async function ({route, env, store}) {
   // }
 
   // add the external handler to store
-  // if(!store.state.ext_handler || store.state.ext_handler == '') {
-  //   store.commit('update', {ext_handler: env.ext_handler})
-  // }
-
-  // console.log('pageload:', process.server, process.client, process.static)
-
-  async function loadDataOnServer() {
-    // if universal mode, don't load data when not serer
-    if(process.mode == 'universal' && !process.server)
-      return false;
-
-      let staticData
-      if(!store.state.Content) {
-        staticData = store.dispatch('loadCytosis', {
-          env,
-          tableIndex: 'static',
-        })
-      }
-
-      return Promise.all([staticData])
+  if(!store.state.ext_handler || store.state.ext_handler == '') {
+    store.commit('update', {ext_handler: env.ext_handler})
   }
 
-  // only do it on server-side
-  // static is loaded on client on every page load/refresh, dynamic is only on generation
-  
+  console.log('Pageload:', routeName, `[server:${process.server} / client:${process.client} / static:${process.static}]`)
+
+
+  // load novelmonkey saved content
   store.dispatch('loadData')
+  store.dispatch('setSessionStart')
 
 
   // set the light mode based on time
-
   const now = new Date
   const nowHour = now.getHours()
   // 12pm-7am is moonlight (no lights, pitch dark room)
@@ -65,22 +85,17 @@ export default async function ({route, env, store}) {
     store.dispatch('toggleLight',1)
   }
 
-  if(env.offline)
-    return undefined
+  // only do it on server-side
+  // static is loaded on client on every page load/refresh, dynamic is only on generation
+  
+  // nuxt expects a promise for async middleware
+  // const data = await loadDataOnServer()
+  return loadDataOnServer(routeName, store, env)
 
-  return loadDataOnServer();
-
-  // loads once on client; if cytosis exists it'll 
-  // loadOnce();
-
-  // clear search if we're not on a directory page
-
-  // Populate Phage Directory 
-  // If the user is not authenticated
-  // if (!store.state.authenticated) {
-  //   return redirect('/login')
-  // }
 }
+
+
+
 
 
 

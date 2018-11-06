@@ -4,32 +4,61 @@ $writer-width: 640px;
 $writer-padding: $size;
 $writer-radius: $size-half;
 
+
+/* 
+
+  Basic mode / in-page mode
+
+ */
 .Writer {
   overflow-anchor: none;
   min-height: 70vh;
   position: relative;
+  @extend ._depth-400;
 
-  // on the homepage
-  &.--inline {
-    max-width: $writer-width;
-    margin: 0 auto;
-    padding: $size $size-2;
-    border-radius: $writer-radius;
-    background-color: v(writer-bg);
+  max-width: $writer-width;
+  margin: 0 auto;
+  padding: $size $size-2;
+  border-radius: $writer-radius;
+  background-color: v(writer-bg);
 
-    .Inputter {
-      position: sticky;
-      bottom: $size;
-    }
-
-    .Renderer-menu {
-      position: sticky;
-      top: $size-half;
-    }
-
+  .Inputter {
+    position: sticky;
+    bottom: $size;
   }
 }
 
+.Renderer-menu {
+  @include screen-sm {
+    position: sticky;
+    top: $size-half;
+  }
+  @include screen-xs {
+    display: block;
+  }
+
+  margin-bottom: $size-4;
+  opacity: 0.2;
+  z-index: 200;
+
+  // annoying going from regular to full screen, menu will slowly move right: 
+  // this can probably be fixed with better design later
+  &, * {
+    // transition: none;
+  }
+  &:hover {
+    opacity: 1;
+  }
+
+  button.--text {
+    padding-left: $size/4;
+    padding-right: $size/4;
+  }
+
+  .Renderer-menu-right {
+    text-align: left;
+  }
+}
 
 .Renderer-overlay {
   z-index: 10;
@@ -77,6 +106,49 @@ $writer-radius: $size-half;
   align-items: center;
 }
 
+.Renderer-name { // input for novel name
+  padding: 0 $size-half;
+  border: none;
+  align-items: center;
+  /* justify-content: center; */
+  vertical-align: bottom;
+  height: $size-2;
+  border-bottom: v(input-bg) solid 2px;
+  border-radius: $radius;
 
+  @include screen-xs {
+    margin-bottom: $size;
+  }
+
+  @extend %ease;
+
+  &:hover {
+    background: v(input-bg-active);
+    @extend %ease;
+  }
+
+  &:focus {
+    background: v(input-bg-active);
+    border-bottom: v(input-bg-active) solid 2px;
+    @extend %ease;
+  }
+}
+
+
+
+/* 
+
+  Full Screen mode
+
+ */
+
+
+.Writer.--fullScreen {
+  overflow: scroll;
+
+  .Renderer-content {
+    margin-bottom: $size-10;
+  }
+}
 
 

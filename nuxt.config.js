@@ -27,7 +27,7 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
-const offline = true;//false
+const offline = false
 const mode = 'spa' // loads airtable dynamically
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
 
@@ -247,7 +247,8 @@ module.exports = {
     { src: '~/plugins/cytosis.js' },
     { src: '~/plugins/date.js' },
     { src: '~/plugins/clipboard.js' },
-    { src: '~/plugins/scrollto.js' },
+    { src: '~/plugins/fscreen.js' },
+    // { src: '~/plugins/scrollto.js' },
   ],
 
   modules: [
@@ -256,9 +257,9 @@ module.exports = {
       id: site_ga,
       disabled: true // gdpr: https://medium.com/dailyjs/google-analytics-gdpr-and-vuejs-e1bd6affd2b4
     }],
-    ['@nuxtjs/markdownit', {
-      html: true,
-    }],
+    // ['@nuxtjs/markdownit', {
+    //   html: true,
+    // }],
     ['@nuxtjs/toast', {
       html: true,
     }],
@@ -295,25 +296,25 @@ module.exports = {
     ]
   },
 
-  markdownit: {
-    // preset: 'default',
-    injected: false, // markdownit.js plugin takes over injection
-    // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
-    // use the custom plugin/markdownit to inject properly; the official thing is broken
-    // injected: true, // commented out to allow attrs in lang="md" blocks
-    // BUG: in @nuxtjs/markdownit/index.js: this needs to be set: 
-    //      options: Object.assign({}, options, this.options.markdownit)
-    //      this allows lang="md" to continue processing plugins like markdown-it-attrs, otherwise it doesn't do that anymore
-    // otherwise plugins will break
-    html: true,
-    typographer: true,
-    linkify: true,
-    breaks: true,
-    use: [
-      'markdown-it-attrs',
-      ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
-    ],
-  },
+  // markdownit: {
+  //   // preset: 'default',
+  //   injected: false, // markdownit.js plugin takes over injection
+  //   // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
+  //   // use the custom plugin/markdownit to inject properly; the official thing is broken
+  //   // injected: true, // commented out to allow attrs in lang="md" blocks
+  //   // BUG: in @nuxtjs/markdownit/index.js: this needs to be set: 
+  //   //      options: Object.assign({}, options, this.options.markdownit)
+  //   //      this allows lang="md" to continue processing plugins like markdown-it-attrs, otherwise it doesn't do that anymore
+  //   // otherwise plugins will break
+  //   html: true,
+  //   typographer: true,
+  //   linkify: true,
+  //   breaks: true,
+  //   use: [
+  //     'markdown-it-attrs',
+  //     ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
+  //   ],
+  // },
 
   toast: { 
     position: 'top-right' 
@@ -335,15 +336,16 @@ module.exports = {
       plugins: ["transform-vue-jsx", "transform-runtime", "transform-object-rest-spread"],
     },
     // vendor: ['cytosis'],
-    extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
+    extend (config, { isDev }) {
+      if (isDev && process.client) {
         config.module.rules.push(
         {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        },{
+        },
+        {
           test: /\.js$/,
           loader: 'babel-loader',
           exclude: /(node_modules)/

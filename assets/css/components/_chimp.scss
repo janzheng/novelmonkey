@@ -2,7 +2,12 @@
 
 .Chimp {
   position: relative;
-  width: 60px;
+  width: 80px;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+
   .Chimp-container {
     position: absolute;
   }
@@ -12,7 +17,7 @@
   .mouth {
     @include transform(rotate(-90deg));
     position: absolute;
-    left: 21.5px;
+    left: 22px;
     bottom: -6px;
   }
 }

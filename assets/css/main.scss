@@ -54,10 +54,6 @@ p, ul {
     }
 }
 
-.Box {
-  background-color: v(bg);
-  color: v(text)
-}
 
 
 
@@ -167,30 +163,27 @@ a {
 
 
 
-// temporary stuff
-.Home-container {
-  // max-width: $width-site-min;
-  // text
+
+
+/* 
+
+  Depth
+  - eventually bring this into coeur
+
+ */
+
+
+$depth_: (
+  400: 0px 4px 12px rgba(70,70,70, 0.2),
+) !default;
+
+
+// 
+//    SHADOWS
+// 
+
+._depth-400 {
+  box-shadow: usetheme(400, $depth_);
 }
-
-
-
-/*  VOM JOIN FORM */
-
-.Join-options {
-
-  &.--one {
-    @extend ._width-content-magic;
-    margin: 0 auto;
-  }
-  &.--two {
-    @extend ._grid-2;
-  }
-  &.--three {
-    @extend ._grid-3;
-  }
-}
-
-
 
 
