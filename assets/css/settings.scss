@@ -14,12 +14,14 @@ $theme-sizes: (
 
 
 $size: 16px;
-$size-serif: $size + 6px;
+$size-serif: $size + 5px;
 $lineheight-serif: $size * 1.7;
-
 
 $size-serif-small: $size + 2px;
 $lineheight-serif-small: $size * 2.2;
+
+$size-mono: $size - 0px;
+$lineheight-mono: $size * 1.5;
 
 $font-lineheight: 22px;
 // $font-size-base: 18px;
@@ -35,13 +37,18 @@ $z-popup: 100; //
 $z-top: 90;
 
 
+// reconfigure xs (phone) sizes to be smaller
+$width-xs-max: 583px    !default;
+$width-sm-min: 584px    !default;
+
 
 @import '../../node_modules/coeur/styles/index.scss';
 
 
 
 %font-sans {
-  font-family: 'Poppins', "-apple-system", "BlinkMacSystemFont", "system-ui", "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", "Helvetica", "arial", "sans-serif";
+  // font-family: 'Poppins', "-apple-system", "BlinkMacSystemFont", "system-ui", "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", "Helvetica", "arial", "sans-serif";
+  font-family: "-apple-system", "BlinkMacSystemFont", "system-ui", "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", "Helvetica", "arial", "sans-serif";
 } ._font-sans {@extend %font-sans;}
 
 
@@ -89,10 +96,38 @@ $color-blue-light: #F3FBFD;
 // contextual colors
 $color-bg: $color-blue-light;
 
-// color map 
+// color map; contextual colors?
 $novelmonkey: (
   blue-light: #F3FBFD,
   blue-dark: #0E1E24,
+  whiter_a: rgba(usetheme(white, $colors_), 1),
+
+  // used for inputs
+  red: rgba(usetheme(red, $colors_), 0.5),
+  red-300: rgba(usetheme(red, $colors_), 0.15),
+
+  blue: rgba(usetheme(blue, $colors_), 0.6),
+  blue-300: rgba(usetheme(blue, $colors_), 0.25),
+
+  writer-width: 760px,
+  writer-width-wide: 880px,
+  writer-width-narrow: 640px,
+
+
+  // input
+  input-size: $size + 2px,
+  input-size-serif: $size + 5px,
+  input-size-mono: $size + 2px,
+
+  input-size-zen: $size + 6px,
+  input-size-zen-serif: $size + 12px,
+  input-size-zen-mono: $size + 6px,
+
+  input-height: $size-4,
+  input-height-active: $size-6,
+
+  input-height-zen: $size-8,
+  input-height-zen-active: $size-9,
 );
 // @include colorate($novelmonkey);
 
@@ -109,14 +144,19 @@ $daylight: (
   // context colors 
   active: usetheme(red, $colors_),
 
-
   // renderer colors
   // paper / text
-  writer-bg: usetheme(whiter, $colors_),
+  writer-bg: usetheme(whiter_a, $novelmonkey),
+  writer-input-bg: rgba(248,248,248,0.88),
+  writer-zen-shadow: 0 0 8px rgba(80, 80, 80, 0.4),
 
   // inputs
   input-bg: usetheme(silver-lighter, $colors_),
-  input-bg-active: usetheme(silver-light, $colors_),
+  input-bg-active: usetheme(silver-lighter, $colors_),
+  input-color: usetheme(black, $colors_),
+  input-border: usetheme(blue, $novelmonkey),
+  input-border-hover: usetheme(blue-300, $novelmonkey),
+  input-border-active: usetheme(blue-300, $novelmonkey),
 );
 
 $moonlight: (

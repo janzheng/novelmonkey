@@ -22,20 +22,27 @@ export const getWordCount = function() {
 
 // scrolling
 // regular in-page, scroll so always see last sentence
-let refBelowRenderer
-export const setRefBelowRenderer = function(el) {
-  refBelowRenderer = el
+let writerBottom
+export const setRefWriterBottom = function(el) {
+  writerBottom = el
 }
-export const scrollToRendererBottom = function() {
+export const scrollToWriterBottom = function(_this) {
+  // console.log('scrollToWriterBottom', writerBottom)
       // VueScrollTo.scrollTo('#writer', 200, { easing: 'linear' })
-	if (refBelowRenderer) {
-    const calc = refBelowRenderer.offsetTop - window.innerHeight + 32
+	if (writerBottom) {
+    const calc = writerBottom.offsetTop - window.innerHeight + 32
     
-    window.scroll({
-      left: 0,
-      top: calc,
-      behavior: 'smooth',
-    })
+    if(calc - window.scrollY < 50) {
+      window.scroll(0, calc) // smooth scroll annoying when continuous typing
+    } else {
+      window.scroll({
+        left: 0,
+        top: calc,
+        behavior: 'smooth',
+      })
+    }
+    if(_this)
+      _this.$store.dispatch('inputFocus')
   }
 
 }
@@ -45,15 +52,18 @@ let refWriter
 export const setWriter = function(el) {
   refWriter = el
 }
-export const scrollToFullscreenBottom = function() {
+export const scrollToFullscreenBottom = function(_this) {
   // console.log('scrollToFullscreenBottom', refWriter)
-	if (refWriter)
+	if (refWriter) {
     refWriter.scroll({
       left: 0,
       top: refWriter.scrollHeight,
       behavior: 'smooth'
     })
+    if(_this)
+      _this.$store.dispatch('inputFocus')
 		// refWriter.scrollTop = refWriter.scrollHeight
+  }
 }
 
 
@@ -66,10 +76,10 @@ export const fullscreenEnter = function(_this) {
   function handler() {
    if (_this.$fscreen.fullscreenElement !== null) {
     _this.$store.commit('setFullscreen')
-    scrollToFullscreenBottom()
+    scrollToFullscreenBottom(_this)
    } else {
     _this.$store.commit('setFullscreenOff')
-    scrollToRendererBottom()
+    scrollToWriterBottom(_this)
    }
   }
 }

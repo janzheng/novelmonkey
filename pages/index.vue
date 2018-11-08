@@ -1,11 +1,12 @@
 <template>
 
-  <div class="Home">
+  <div class="Home" id="top">
 
     <div class="Home-intro">
     </div>
 
     <Writer class="--inline" :inline="true" />
+    <div class="BackTop" v-scroll-to="'#top'" v-if="showBackTop">go back up</div>
 
   </div>
 </template>
@@ -18,6 +19,8 @@
 import { mapState } from 'vuex'
 import Writer from '~/components/Writer'
 
+let listen
+
 export default {
 
   components: {
@@ -25,7 +28,7 @@ export default {
   },
 
   layout: 'contentframe',
-  middleware: 'pageload',
+  // middleware: 'pageload',
 
   async asyncData({app, env, route, store}) {
     // console.log('asyncdata store: ', store.state.cytosis)
@@ -48,14 +51,44 @@ export default {
   },
   
   mounted: function () {
+    console.log('mounted')
+
+    if(listen) {
+      console.log('listen already exist!?')
+    }
+    
+    let listen = document.addEventListener('keydown', (e) => {
+
+      // console.log('key:', e.keyCode, 'meta:', e.metaKey, 'ctrl:', e.ctrlKey )
+      // save command listener
+      // ctrl + s or meta + s
+      if (e.keyCode == 83 && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault()
+        // console.log('save trigger' )
+        this.$store.dispatch('generateSave')
+      }
+
+      // esc command listener
+      if (e.keyCode == 27) {
+        // console.log('esc key trigger')
+        this.$store.dispatch('escape')
+      }
+    });
+
 
   },
 
   computed: {
     ...mapState([
       'Content',
+      'session'
       ]),
 
+    showBackTop() {
+      if(this.session.length > 5)
+        return true
+      // don't show back top if no content
+    },
   },
 
   methods: {

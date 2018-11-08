@@ -46,7 +46,7 @@ async function loadDataOnServer(routeName, store, env) {
 
 
 
-export default function ({route, env, store}) {
+export default function ({route, env, store, isMobileOrTablet, isMobile}) {
   const routeName = route.name;
   // console.log('pageload ctx:', context);
 
@@ -60,6 +60,8 @@ export default function ({route, env, store}) {
   //   )
   // }
 
+
+
   // add the external handler to store
   if(!store.state.ext_handler || store.state.ext_handler == '') {
     store.commit('update', {ext_handler: env.ext_handler})
@@ -67,11 +69,10 @@ export default function ({route, env, store}) {
 
   console.log('Pageload:', routeName, `[server:${process.server} / client:${process.client} / static:${process.static}]`)
 
-
+  // console.log('PL', isMobile)
   // load novelmonkey saved content
   store.dispatch('loadData')
   store.dispatch('setSessionStart')
-
 
   // set the light mode based on time
   const now = new Date
@@ -88,6 +89,10 @@ export default function ({route, env, store}) {
   // only do it on server-side
   // static is loaded on client on every page load/refresh, dynamic is only on generation
   
+  // console.log(env)
+  if(env.offline)
+    return null
+
   // nuxt expects a promise for async middleware
   // const data = await loadDataOnServer()
   return loadDataOnServer(routeName, store, env)

@@ -9,8 +9,8 @@ Novelmonkey 3 (vue) Notes
 
 ## Todo
 
-- use vue-scrollto instead of window.scroll in the helpers.js for easing
-
+- airtable Q&A box? maybe just email for now
+- scroll smooth doesn't work for a lot of browsers, maybe still need scrollto
 
 ## Design
 

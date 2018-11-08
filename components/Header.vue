@@ -3,7 +3,6 @@
   <section class="Header _padding-top _padding-bottom --antialiased _width-content-max _margin-center">
     <div class="Header-content _flex-row">
 
-
       <div class="Header-left _flex-1">
         <div @click="goHome" class="_pointer">
           <!-- <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/nmcoin.png"/></router-link> -->

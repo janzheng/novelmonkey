@@ -10,23 +10,25 @@
 
  -->
 <template>
-  <div class="Writer _flex-col" :class="fullscreen ? '--fullScreen' : ''" ref="writer" id="writer">
+  <div class="Writer _flex-col" 
+  :class="[fullscreenClass, zenClass]" 
+  ref="writer" id="writer">
     <Renderer class="_flex-1" />
     <Inputter :autofocus="true" />
-    <div class="yoo">
-      yoooo
+    <div class="Writer-bottom" ref="writerBottom" id="writerBottom">
+      <!-- used as a scroll location -->
     </div>
-
   </div>
 </template>
 
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Renderer from '~/components/Renderer'
 import Inputter from '~/components/Inputter'
-import { setWriter } from '~/assets/helpers'
+import { setWriter, setRefWriterBottom } from '~/assets/helpers'
+
 
 export default {
 
@@ -38,6 +40,7 @@ export default {
   mounted () {
     // this.$store.commit('setWriter', this.$refs.writer)
     setWriter(this.$refs.writer)
+    setRefWriterBottom(this.$refs.writerBottom)
   }, 
 
   data () {
@@ -50,8 +53,30 @@ export default {
 
   computed: {
     ...mapState([
-      'fullscreen'
+      'fullscreen',
+      'expand',
+      'zen',
       ]),
+
+    ...mapGetters([
+      'lightModeName',
+      'typefaceName',
+      ]),
+
+    typeface() {
+      return `--${this.typefaceName}`
+    },
+
+    zenClass() {
+      if(this.zen)
+        return `--zen`
+      return ''
+    },
+
+    fullscreenClass() {
+      return this.fullscreen ? '--fullscreen' : ''
+    }
+
   }
 
 }

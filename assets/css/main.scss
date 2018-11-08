@@ -18,10 +18,15 @@
 //   }
 // }
 
+@mixin serif {
+  @extend %font-serif;
+  font-size: $size-serif;
+  line-height: $lineheight-serif;
+}
 
 body, html {
   @extend %font-sans;
-  @extend %ease-xslow;
+  // @extend %ease-xslow;
   font-size: $size;
   line-height: $size * 1.5;
   // background-color: usetheme(black, $colors_);
@@ -29,10 +34,23 @@ body, html {
 }
 
 p, ul {
-  @extend %font-serif;
-  font-size: $size-serif;
-  line-height: $lineheight-serif;
   // letter-spacing: 0.3px;
+  // lots of paragraphs are dependent on containers
+}
+
+@mixin themeease() {
+  @include ease($speed-xslow);
+  transition-property: background-color, opacity, width, top, left, padding, margin;
+  // exclude: line-height, font-size;
+
+
+    // height: 100%;
+    // max-width: 100%;
+    // width: 100%;
+    // top: 0;
+    // left: 0;
+    // z-index: 200;
+
 }
 
 :root {
@@ -42,16 +60,20 @@ p, ul {
     @include themevars($daylight);
 
     &,* {
-      @extend %ease-xslow;
+      // @extend %ease-xslow;
+      @include themeease();
     }
   }
 
   .--moonlight {
-    @include themevars($moonlight);  }
+    @include themevars($moonlight); 
 
     &,* {
-      @extend %ease-xslow;
+      // @extend %ease-xslow;
+      // @include ease($speed-xslow, background-color);
+      @include themeease();
     }
+  }
 }
 
 

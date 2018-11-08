@@ -19,6 +19,18 @@ button, ._button {
 }
 
 
+.BackTop {
+	text-align: center;
+	padding: $size-2;
+	margin-top: $size-4;
+	margin-bottom: $size-4;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+
 ._content {
   padding: 0;
   margin-top: $size-2;
@@ -41,6 +53,46 @@ button, ._button {
 //     color: v(alert-text) !important;
 //   }
 // }
+
+
+// Menu that's sitting in the renderer
+// the header menu is called "settings" and will probably be a flyout over time
+.Menu {
+	
+  button.--text {
+    padding-left: $size/4;
+    padding-right: $size/4;
+    font-family: inherit;
+    // line-height: inherit;
+    // font-size: inherit;
+		// @extend ._font-small;
+  }
+}
+	
+  .Menu-right {
+    text-align: left;
+    @include screen-sm {
+      text-align: right;
+    }
+  }
+  .Menu-inset {
+  	display: inline-block;
+  }
+
+
+// this is the wordcount + other things hovering over input
+.Data {
+	&.--half {
+		opacity: 0.5;
+	}
+	&.--none {
+		opacity: 0;
+		&:hover {
+			opacity: 0.2;
+		}
+	}
+
+}
 
 
 

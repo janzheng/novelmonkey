@@ -121,7 +121,7 @@ article.narrow {
 
 
 .Footer {
-  margin-top: $size-5;
+  // margin-top: $size-5;
   padding-bottom: $size-2;
   background-color: v(footer-bg);
 
@@ -130,9 +130,9 @@ article.narrow {
   }
   
   &, p {
-    @extend %font-serif;
-    font-size: $size-serif-small;
-    line-height: $lineheight-serif-small;
+    // @include serif;
+    @extend ._font-small;
+    
   }
   
   // color: $color-bg;

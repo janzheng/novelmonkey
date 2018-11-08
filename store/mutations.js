@@ -193,6 +193,10 @@ export default {
     state['inputRef'] = el
   },
 
+  setDevice (state, el) {
+    state['device'] = el
+  },
+
   // REFS / DOM setters
   // sets the writer ref so it can be accessed for full screen
   

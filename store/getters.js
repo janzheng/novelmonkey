@@ -14,6 +14,10 @@ export default {
     return state.lightModes[state.lightMode]
   },
 
+  typefaceName (state) {
+    return state.typefaces[state.typeface]
+  },
+
   hasWritten (state) {
     if (state.sessionCount > 0)
       return true

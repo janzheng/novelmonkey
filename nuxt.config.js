@@ -27,7 +27,7 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
-const offline = false
+const offline = true;
 const mode = 'spa' // loads airtable dynamically
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
 
@@ -134,7 +134,7 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: site_ico }, // <link rel="icon" sizes="192x192" href="/path/to/icon.png">
       { rel: 'apple-touch-icon', href: site_ico }, // default resolution is 192x192 <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
       { rel: 'mask-icon',  href: site_ico, color: site_color}, // <link rel="mask-icon" href="/path/to/icon.svg" color="blue"> <!-- Safari Pinned Tab Icon -->
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lora|Poppins:300,400,700' },
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lora|Poppins:300,400,700' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=EB+Garamond' }
     ],
   },
@@ -264,6 +264,7 @@ module.exports = {
       html: true,
     }],
     '@nuxtjs/pwa',
+    'nuxt-device-detect',
     // '@nuxtjs/workbox',
     // '@nuxtjs/manifest',
   ],

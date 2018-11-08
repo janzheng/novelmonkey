@@ -4,6 +4,7 @@ import fscreen from 'fscreen'
 import Cytosis from '~/other/cytosis'
 import _ from 'lodash'
 
+import { scrollToWriterBottom, scrollToFullscreenBottom } from '~/assets/helpers'
 
 export default {
   async loadCytosis ({ commit, state }, {env, tableIndex, options}) {
@@ -61,6 +62,20 @@ export default {
 
     commit('update', {lightMode: lightMode})
   },
+
+  toggleTypeface({ commit, state }, el) {
+    let typeface = state.typeface + 1
+
+    if (state.typeface >= state.lightModes.length -1)
+      typeface = 0
+
+    // if pass in a number, ignore everything else
+    if (el)
+      typeface = el
+
+    commit('update', {typeface: typeface})
+  },
+
 
   commitInput({ commit, state, dispatch }) {
     commit('updateInput')
@@ -149,20 +164,40 @@ export default {
       state.inputRef.focus()
   },
 
-  toggleExpand({ state, commit }) {
-    if(state['expand'])
+  toggleExpand({ state, commit, dispatch }) {
+    if(state['expand']) {
       commit('setExpandOff')
-    else
+    }
+    else {
       commit('setExpand')
+    }
+    dispatch('inputFocus')
   },
   
-  toggleZen({ state, commit }) {
+  toggleZen({ state, commit, dispatch }) {
     if(state['zen'])
       commit('setZenOff')
     else
       commit('setZen')
+    dispatch('inputFocus')
   },
 
+  // escape key action
+  escape({ state, commit, dispatch }) {
+    // if(state['expand'])
+    //   commit('setExpandOff')
+    if(!state['zen'] || !state['expand']) {
+      commit('setExpand')
+      commit('setZen')
+      _.delay(scrollToFullscreenBottom,100)
+    } else {
+      commit('setExpandOff')
+      commit('setZenOff')
+      _.delay(scrollToWriterBottom,100)
+    }
+    dispatch('inputFocus')
+    // dispatch('toggleExpand')
+  },
 }
 
 // Helper methods

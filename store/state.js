@@ -9,9 +9,12 @@ export default {
   currentPolicy: false,
   searchUrl: '',
   lightModes: ['daylight','twilight','moonlight'],
+  // lightModes: ['dawnlight','dusklight','twilight','moonlight'], // dusklight is the old novelmonkey scheme
+  typefaces: ['serif','sans serif','mono'],
   cytosis: '',
 
   // user settings
+  typeface: 0, // maps to typefaces
   lightMode: 0, // maps to lightModes
   fullscreen: false, // flag for full screen
   zen: false, // zen mode
@@ -25,9 +28,9 @@ export default {
   inputString: '', // current, uncommitted string (before hitting enter)
   inputCount: 0, // current input char count
 
-  // refs / DOM
+  // refs / DOM /
   refWriter: '', // tracks the ref for writer component, for full screen
-  refBelowRenderer: '', // bottom of the renderer (default is footer, but this would change if other things are added)
+  refWriterBottom: '', // bottom of the renderer (default is footer, but this would change if other things are added)
 
 }
 

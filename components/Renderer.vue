@@ -7,11 +7,13 @@
        v-on:dragenter="onDrag"
        v-on:dragover="onDrag"
        v-on:dragleave="onDragLeave"
+       @click="rendererClick"
+      :class="[typeface, zenClass]"
   >
   <!-- v-on:click="setFocus" -- removed from Renderer since it makes selecting and copying hard -->
     <div class="Renderer-overlay" :class="showOverlay ? '--show' : ''"
     >
-      <p>drop the novelmonkey.save file!</p>
+      <span><p>drop the novelmonkey.save file!</p></span>
     </div>
 
     <!-- 
@@ -36,37 +38,41 @@
     </div> -->
 
     <!-- regular menu -->
-    <div class="Renderer-menu _flex-row _margin-bottom-half _right" 
-      :class="hasWritten ? '' : '_opacity-10'"
+    <div class="Renderer-menu Menu _flex-row _margin-bottom-half _right" 
+      :class="[hasWritten ? '' : '_opacity-10', zenClass]"
       v-on:click="ignoreFocus"
     >
-      <div class="Renderer-menu-left _flex-grow">
-        <input class="Renderer-name" v-model.trim="sessionName" />
+      <div class="Menu-left _flex-grow">
+        <input class="Renderer-name" :class="typeface"
+          v-model.trim="sessionName" />
       </div>
 
-      <div class="Renderer-menu-right _flex-1">
+      <div class="Menu-right _flex-1">
 
-        <button class="_button --text --short _margin-none _font-small"
+        <button class="_button --text --short _margin-none"
           @click="toggleLightMode"
         >{{lightModeName}}</button>
 
-        <button class="_button --text --short _margin-none _font-small"
+        <button class="_button --text --short _margin-none "
           @click="toggleZen"
         >{{zenName}}</button>
 
-        <button class="_button --text --short _margin-none _font-small"
+        <button class="_button --text --short _margin-none "
           @click="toggleExpand"
+          v-if="!fullscreen"
         >{{ expandName }}</button>
 
-        <button class="_button --text --short _margin-none _font-small"
-          @click="openFullscreen"
-          v-if="!fullscreen"
-        >fullscreen</button>
+        <div class="Menu-inset">
+          <button class="_button --text --short _margin-none "
+            @click="openFullscreen"
+            v-if="!fullscreen"
+          >fullscreen</button>
 
-        <button class="_button --text --short _margin-none _font-small"
-          @click="closeFullscreen"
-          v-if="fullscreen"
-        >exit fullscreen</button>
+          <button class="_button --text --short _margin-none "
+            @click="closeFullscreen"
+            v-if="fullscreen"
+          >exit fullscreen</button>
+        </div>
 
 <!-- 
         <button class="_button --text --short _margin-none _font-small"
@@ -91,16 +97,15 @@
 
 
 
-
-
     <!-- session story text content -->
     <div class="Renderer-content" v-if="session.length > 0"
+        :class="typeface"
       >
-      <div class="Fragment _margin-bottom" v-for="fragment of session" :key="`${fragment.seshId}`">
+      <p class="Fragment _margin-bottom" v-for="fragment of session" :key="`${fragment.seshId}`">
         {{fragment.string}}
         <!-- {{fragment.time.toString()}} -->
         <!-- <div class="_font-smaller">{{fragment.count}}</div> -->
-      </div>
+      </p>
     </div>
 
     <div class="Renderer-cta" v-else>
@@ -151,7 +156,7 @@ export default {
          theme: "primary", 
          position: "top-right", 
          duration : 2000
-      } )
+      })
     },
 
     copyError() {
@@ -218,6 +223,12 @@ export default {
       this.$store.dispatch('toggleExpand')
     },
 
+    rendererClick(e) {
+      // deactivate zen if it's on
+      if(this.zen)
+        this.$store.dispatch('toggleZen')
+
+    }
 
   },
 
@@ -237,19 +248,31 @@ export default {
       'hasWritten',
       'activeCount',
       'lightModeName',
+      'typefaceName',
       ]),
+
+    typeface() {
+      return `--${this.typefaceName}`
+    },
+
 
     expandName() {
       if(!this.expand)
-        return "expand"
-      return "shrink"
-    },
-    zenName() {
-      if(!this.zen)
-        return "enter zen"
-      return "leave zen"
+        return "focus"
+      return "unfocus"
     },
 
+    zenName() {
+      if(!this.zen)
+        return "zen"
+      return "unzen" // no UI for unzenning, you just click anywhere
+    },
+
+    zenClass() {
+      if(this.zen)
+        return `--zen`
+      return ''
+    },
 
     sessionName: {
       get: function () {
