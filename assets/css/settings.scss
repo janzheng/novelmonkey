@@ -84,6 +84,7 @@ $width-sm-min: 584px    !default;
 
 @include addtheme($theme-sizes);
 
+
 @function color($color, $adjust) {
   @if ($adjust > 100) {
     @return darken($color, $adjust - 100 );
@@ -94,7 +95,7 @@ $width-sm-min: 584px    !default;
 $color-blue-light: #F3FBFD;
 
 // contextual colors
-$color-bg: $color-blue-light;
+$bg-color: $color-blue-light;
 
 // color map; contextual colors?
 $novelmonkey: (
@@ -103,11 +104,28 @@ $novelmonkey: (
   whiter_a: rgba(usetheme(white, $colors_), 1),
 
   // used for inputs
-  red: rgba(usetheme(red, $colors_), 0.5),
-  red-300: rgba(usetheme(red, $colors_), 0.15),
+  // red: rgba(usetheme(red, $colors_), 0.8),
+  // red-300: rgba(usetheme(red, $colors_), 0.15),
+  red: rgba(#BD5843, 0.9),
+  red-400: rgba(usetheme(red, $colors_), 0.8),
+  red-300: rgba(#BD5843, 0.7),
+  red-200: rgba(usetheme(red, $colors_), 0.4),
+  red-100: rgba(#BD5843, 0.4),
+  red-50: rgba(#BD5843, 0.3),
 
+  blue-700: rgba(usetheme(blue, $colors_), 0.9),
   blue: rgba(usetheme(blue, $colors_), 0.6),
+  blue-500: #8BADC2,
+  blue-400: rgba(#8BADC2, 0.6),
   blue-300: rgba(usetheme(blue, $colors_), 0.25),
+  blue-200: #27323B,
+  blue-100: #181A20,
+  blue-0: #1A1A1A,
+
+  yellow: rgba(#FFF9D2, 1),
+  yellow-700: rgba(#e4dfb2, 1),
+
+  black-50: #050507,
 
   writer-width: 760px,
   writer-width-wide: 880px,
@@ -128,25 +146,43 @@ $novelmonkey: (
 
   input-height-zen: $size-8,
   input-height-zen-active: $size-9,
+
+  data-counter-size: $size-4,
+  data-counter-size-serif: $size-5,
+  data-counter-size-full-zen: $size-5,
+  data-counter-size-full-zen-serif: $size-6,
 );
 // @include colorate($novelmonkey);
 
 
 // contextual themes
+
+// day colors, bright cafe, outside, lots of sun
+// high contrast, avoid soft colors
 $daylight: (
-  bg: usetheme(blue-light, $novelmonkey),
-  footer-bg: color(usetheme(blue-light, $novelmonkey), 110),
-  text: usetheme(teal, $novelmonkey),
+  bg-color: usetheme(blue-light, $novelmonkey),
+
+  footer-color-bg: color(usetheme(blue-light, $novelmonkey), 110),
+  footer-color: usetheme(black, $novelmonkey),
+  footer-color-link: usetheme(blue, $colors_),
+  footer-color-link-hover: usetheme(blue-300, $colors_),
+
+  text-color: usetheme(black, $novelmonkey),
+  inset-color-bg: usetheme(silver-lighter, $colors_),
+  ui-color: usetheme(black, $novelmonkey),
+  logo-color: usetheme(blue-700, $novelmonkey),
 
   alert-bg: usetheme(blue-dark, $novelmonkey),
-  alert-txt: usetheme(black, $colors_),
+  alert-text: usetheme(black, $colors_),
 
   // context colors 
-  active: usetheme(red, $colors_),
+  active-color: usetheme(blue, $novelmonkey),
+  data-color: usetheme(blue-700, $novelmonkey),
 
   // renderer colors
   // paper / text
   writer-bg: usetheme(whiter_a, $novelmonkey),
+  writer-color: usetheme(black, $novelmonkey),
   writer-input-bg: rgba(248,248,248,0.88),
   writer-zen-shadow: 0 0 8px rgba(80, 80, 80, 0.4),
 
@@ -154,16 +190,138 @@ $daylight: (
   input-bg: usetheme(silver-lighter, $colors_),
   input-bg-active: usetheme(silver-lighter, $colors_),
   input-color: usetheme(black, $colors_),
+  input-color-placeholder: usetheme(gray, $colors_),
+  input-border: usetheme(blue, $novelmonkey),
+  input-border-hover: usetheme(blue-300, $novelmonkey),
+  input-border-active: transparent, // usetheme(blue-300, $novelmonkey),
+  input-focus-opacity: 0.12,
+  input-select-color: usetheme(blue, $colors_),
+  input-select-bg: usetheme(blue-light, $novelmonkey),
+);
+
+// evening colors; house lights, dark outside
+$twilight: (
+  bg-color: usetheme(blue-200, $novelmonkey),
+
+  footer-color-bg: usetheme(blue-0, $novelmonkey),
+  footer-color: usetheme(gray, $colors_),
+  footer-color-link: usetheme(red, $novelmonkey),
+  footer-color-link-hover: usetheme(red-300, $novelmonkey),
+
+  text-color: usetheme(black, $novelmonkey),
+  inset-color-bg: usetheme(blue-700, $colors_),
+  ui-color: usetheme(gray, $colors_),
+  logo-color: usetheme(red, $novelmonkey),
+
+  alert-bg: usetheme(red, $novelmonkey),
+  alert-text: usetheme(yellow, $novelmonkey),
+
+  // context colors 
+  active-color: usetheme(red, $novelmonkey),
+  data-color: usetheme(blue-500, $novelmonkey),
+
+  // renderer colors
+  // paper / text
+  writer-bg: usetheme(blue-100, $novelmonkey),
+  writer-color: usetheme(blue-500, $novelmonkey),
+  writer-input-bg: rgba(21,21,31,0.93),
+  writer-zen-shadow: 0 0 8px rgba(80, 80, 80, 0.4),
+
+  // inputs
+  input-bg: rgba(21,21,31,0.8),
+  input-bg-active: usetheme(blue-500, $colors_),
+  input-color: usetheme(blue-500, $novelmonkey),
+  input-color-placeholder: usetheme(blue-400, $novelmonkey),
   input-border: usetheme(blue, $novelmonkey),
   input-border-hover: usetheme(blue-300, $novelmonkey),
   input-border-active: usetheme(blue-300, $novelmonkey),
+  input-focus-opacity: 0.12,
+  input-select-color: usetheme(blue-500, $novelmonkey),
+  input-select-bg: usetheme(blue, $colors_),
 );
 
+// no lights, dark room, moon shining in
 $moonlight: (
-  bg: usetheme(blue, $novelmonkey),
-  footer-bg: color(usetheme(blue-dark, $novelmonkey), 110),
-  text: usetheme(teal, $novelmonkey),
+  bg-color: usetheme(pureblack, $colors_),
+
+  footer-color-bg: usetheme(black-50, $novelmonkey),
+  footer-color: usetheme(gray-dark, $colors_),
+  footer-color-link: usetheme(red-300, $novelmonkey),
+  footer-color-link-hover: usetheme(red-400, $novelmonkey),
+
+  text-color: usetheme(black, $novelmonkey),
+  inset-color-bg: usetheme(blue-700, $colors_),
+  ui-color: usetheme(red-100, $colors_),
+  logo-color: usetheme(red-100, $novelmonkey),
+
+  alert-bg: usetheme(red, $novelmonkey),
+  alert-text: usetheme(yellow, $novelmonkey),
+
+  // context colors 
+  active-color: usetheme(red-400, $novelmonkey),
+  data-color: usetheme(red-100, $novelmonkey),
+
+  // renderer colors
+  // paper / text
+  writer-bg: usetheme(black-50, $novelmonkey),
+  writer-color: usetheme(red-200, $novelmonkey),
+  writer-input-bg: rgba(5,3,2,0.83),
+  writer-zen-shadow: 0 0 8px rgba(80, 80, 80, 0.4),
+
+  // inputs
+  input-bg: rgba(9,6,6,0.7),
+  input-bg-active: usetheme(red-100, $colors_),
+  input-color: usetheme(red-400, $novelmonkey),
+  input-color-placeholder: usetheme(red-100, $novelmonkey),
+  input-border: usetheme(red-100, $novelmonkey),
+  input-border-hover: usetheme(red-50, $novelmonkey),
+  input-border-active: transparent, //usetheme(blue-300, $novelmonkey),
+  input-focus-opacity: 0.35,
+  input-select-color: usetheme(red-300, $novelmonkey),
+  input-select-bg: usetheme(red-50, $novelmonkey),
 );
+
+// for early morning, sunrise, some light
+$dawnlight: ( // novelmonkey2 colors
+  bg-color: usetheme(yellow, $novelmonkey),
+
+  footer-color-bg: color(usetheme(yellow, $novelmonkey), 110),
+  footer-color: usetheme(black, $novelmonkey),
+  footer-color-link: usetheme(red, $novelmonkey),
+  footer-color-link-hover: usetheme(red-300, $novelmonkey),
+
+  text-color: usetheme(black, $novelmonkey),
+  inset-color-bg: usetheme(silver-light, $colors_),
+  ui-color: usetheme(red, $novelmonkey),
+  logo-color: usetheme(red, $novelmonkey),
+
+  alert-bg: usetheme(red, $novelmonkey),
+  alert-text: usetheme(yellow, $novelmonkey),
+
+  // context colors 
+  active-color: color(usetheme(red, $novelmonkey), 120),
+  data-color: usetheme(red, $novelmonkey),
+
+  // renderer colors
+  // paper / text
+  writer-bg: usetheme(whiter_a, $novelmonkey),
+  writer-color: usetheme(black, $novelmonkey),
+  writer-input-bg: rgba(248,248,248,0.88),
+  writer-zen-shadow: 0 0 8px rgba(80, 80, 80, 0.4),
+
+  // inputs
+  input-bg: usetheme(silver-lighter, $colors_),
+  input-bg-active: usetheme(silver-lighter, $colors_),
+  input-color: usetheme(black, $colors_),
+  input-color-placeholder: usetheme(gray, $colors_),
+  input-border: usetheme(red-300, $novelmonkey),
+  input-border-hover: usetheme(red-100, $novelmonkey),
+  input-border-active: transparent, // usetheme(blue-300, $novelmonkey),
+  input-focus-opacity: 0.12,
+  input-select-color: usetheme(blue-100, $novelmonkey),
+  input-select-bg: usetheme(blue-300, $novelmonkey),
+);
+
 
 
 

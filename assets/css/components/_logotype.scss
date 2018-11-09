@@ -5,6 +5,7 @@ $color_logo: inherit; // #7ECDF8 !important;
   // default is small, text-sized
   position: relative;
   white-space: nowrap;
+  color: v(logo-color);
   
   .novel {
     @extend %font-sans;
@@ -12,6 +13,8 @@ $color_logo: inherit; // #7ECDF8 !important;
   }
   .monkey {
     @extend %font-serif;
+    font-size: $size-serif - 2px;
+
     .o {
       position: relative;
       bottom: 2px;

@@ -12,7 +12,7 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "stage": "npm run generate; cd dist; surge . -d novelmonkey.surge.sh",
+    "stage": "NODE_ENV=production; npm run generate; cd dist; surge . -d novelmonkey.surge.sh",
     "prod": "npm run generate; cd dist; surge . -d novelmonkey.com"
   },
   "dependencies": {

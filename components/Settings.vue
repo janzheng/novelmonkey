@@ -1,7 +1,7 @@
 
 <template>
   <div class="">
-    <div class="Settings">
+    <div class="Settings" :class="home ? '--home':''" >
 
       <button class="_button --text --short _margin-none "
       @click="toggleTypeface"
@@ -52,6 +52,9 @@ import { mapState, mapGetters } from 'vuex'
 import { fullscreenEnter } from '~/assets/helpers'
 
 export default {
+
+  props: ['home'],
+
   data: function () {
     return {
       // searchString: this.$store.state.search.string,
@@ -110,7 +113,7 @@ export default {
     copySuccess() {
       if(this.session && this.session.length > 0)
         this.$toast.success('Copied to clipboard!', { 
-           theme: "primary", 
+           theme: `--${this.lightModeName}`, 
            position: "top-right", 
            duration : 2000
         } )
@@ -119,7 +122,7 @@ export default {
     copyError() {
       this.$toast.error(
         'A problem occurred with copying', { 
-           theme: "primary", 
+           theme: `--${this.lightModeName}`, 
            position: "top-right", 
            duration : 5000
         })

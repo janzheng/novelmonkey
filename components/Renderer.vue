@@ -39,7 +39,7 @@
 
     <!-- regular menu -->
     <div class="Renderer-menu Menu _flex-row _margin-bottom-half _right" 
-      :class="[hasWritten ? '' : '_opacity-10', zenClass]"
+      :class="[hasWritten ? '' : '_opacity-10', zenClass, focusedClass]"
       v-on:click="ignoreFocus"
     >
       <div class="Menu-left _flex-grow">
@@ -52,10 +52,6 @@
         <button class="_button --text --short _margin-none"
           @click="toggleLightMode"
         >{{lightModeName}}</button>
-
-        <button class="_button --text --short _margin-none "
-          @click="toggleZen"
-        >{{zenName}}</button>
 
         <button class="_button --text --short _margin-none "
           @click="toggleExpand"
@@ -72,6 +68,11 @@
             @click="closeFullscreen"
             v-if="fullscreen"
           >exit fullscreen</button>
+          
+          <button class="_button --text --short _margin-none "
+            @click="toggleZen"
+          >{{zenName}}</button>
+
         </div>
 
 <!-- 
@@ -249,6 +250,8 @@ export default {
       'activeCount',
       'lightModeName',
       'typefaceName',
+      'focusedClass',
+      'zenClass',
       ]),
 
     typeface() {
@@ -258,20 +261,14 @@ export default {
 
     expandName() {
       if(!this.expand)
-        return "focus"
-      return "unfocus"
+        return "expand"
+      return "shrink"
     },
 
     zenName() {
-      if(!this.zen)
-        return "zen"
-      return "unzen" // no UI for unzenning, you just click anywhere
-    },
-
-    zenClass() {
-      if(this.zen)
-        return `--zen`
-      return ''
+      // if(!this.zen)
+        return "zen mode"
+      // return "unzen" // no UI for unzenning, you just click anywhere
     },
 
     sessionName: {

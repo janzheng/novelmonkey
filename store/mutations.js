@@ -197,6 +197,8 @@ export default {
     state['device'] = el
   },
 
+
+
   // REFS / DOM setters
   // sets the writer ref so it can be accessed for full screen
   
@@ -205,6 +207,7 @@ export default {
   setFullscreen (state) {
     state['fullscreen'] = true
   },
+
   setFullscreenOff (state) {
     state['fullscreen'] = false
   },
@@ -219,9 +222,21 @@ export default {
   setZen (state) {
     state['zen'] = true
   },
+
   setZenOff (state) {
     state['zen'] = false
   },
+
+  // tracks input state; reactively set by Inputter
+  // (can't set from actions since so many ways to focus)
+  setInputFocused (state) {
+    state['focus'] = true
+  },
+
+  setInputUnfocused (state) {
+    state['focus'] = false
+  },
+
 }
 
 

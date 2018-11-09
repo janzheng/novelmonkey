@@ -8,7 +8,7 @@ export default {
   policy: false,
   currentPolicy: false,
   searchUrl: '',
-  lightModes: ['daylight','twilight','moonlight'],
+  lightModes: ['daylight','twilight','moonlight','dawnlight'],
   // lightModes: ['dawnlight','dusklight','twilight','moonlight'], // dusklight is the old novelmonkey scheme
   typefaces: ['serif','sans serif','mono'],
   cytosis: '',
@@ -19,6 +19,7 @@ export default {
   fullscreen: false, // flag for full screen
   zen: false, // zen mode
   expand: false, // expand to fill window, but not full screen
+  focus: false, // is input focused?
 
   // user session content
   sessionName: '',
@@ -28,9 +29,8 @@ export default {
   inputString: '', // current, uncommitted string (before hitting enter)
   inputCount: 0, // current input char count
 
-  // refs / DOM /
+  // refs / DOM / UI
   refWriter: '', // tracks the ref for writer component, for full screen
   refWriterBottom: '', // bottom of the renderer (default is footer, but this would change if other things are added)
-
 }
 

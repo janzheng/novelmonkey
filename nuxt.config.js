@@ -10,7 +10,7 @@
 // these are the default social sharing items
 // make sure to use the Head component for generated data
 const site_policy = '1.0.0'
-const site_ga = 'UA-109657404-1' 
+const site_ga = 'UA-83939324-1' 
 const site_url = 'https://novelmonkey.com'
 const site_name = 'novel monkey';
 const site_twitter = '@novelmonkey';

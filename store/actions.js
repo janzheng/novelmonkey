@@ -3,6 +3,7 @@
 import fscreen from 'fscreen'
 import Cytosis from '~/other/cytosis'
 import _ from 'lodash'
+import moment from 'moment'
 
 import { scrollToWriterBottom, scrollToFullscreenBottom } from '~/assets/helpers'
 
@@ -66,8 +67,10 @@ export default {
   toggleTypeface({ commit, state }, el) {
     let typeface = state.typeface + 1
 
-    if (state.typeface >= state.lightModes.length -1)
+    if (state.typeface == state.typefaces.length-1 )
       typeface = 0
+
+    console.log('typeface:',typeface);
 
     // if pass in a number, ignore everything else
     if (el)
@@ -90,6 +93,9 @@ export default {
     })
     const blob = new Blob([data], {type: "octet/stream"})
 
+    const now = moment(Date.now()).format('MM-DD-YY_HH.mm')
+    console.log('save:',now)
+
     const a = document.createElement("a")
     document.body.appendChild(a)
     a.style = "display: none"
@@ -98,7 +104,7 @@ export default {
 
     const url = window.URL.createObjectURL(blob)
       a.href = url
-      a.download = `${sessionName}-${state.sessionCount}.save` // filename
+      a.download = `${sessionName}_${state.sessionCount}w_${now}.save` // filename
       a.click()
       window.URL.revokeObjectURL(url)
   },

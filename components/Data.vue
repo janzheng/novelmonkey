@@ -2,10 +2,10 @@
 
 <!-- Used to render the current session -->
 <template>
-  <div class="Data" :class="[typeface,styleClass]" @click="toggleStyle"
+  <div class="Data" :class="[typeface,styleClass,zenClass]" @click="toggleStyle"
   >
-    <div class="SessionData-active">
-      {{ activeCount }} / {{ styleName }}
+    <div class="SessionData">
+      {{ activeCount }}
     </div>
   </div>
 </template>
@@ -100,6 +100,7 @@ export default {
       'hasWritten',
       'activeCount',
       'typefaceName',
+      'zenClass',
       ]),
   }
 

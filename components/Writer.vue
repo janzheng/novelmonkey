@@ -11,7 +11,7 @@
  -->
 <template>
   <div class="Writer _flex-col" 
-  :class="[fullscreenClass, zenClass]" 
+  :class="[fullscreenClass, expandClass, zenClass]" 
   ref="writer" id="writer">
     <Renderer class="_flex-1" />
     <Inputter :autofocus="true" />
@@ -61,21 +61,10 @@ export default {
     ...mapGetters([
       'lightModeName',
       'typefaceName',
+      'zenClass',
+      'fullscreenClass',
+      'expandClass',
       ]),
-
-    typeface() {
-      return `--${this.typefaceName}`
-    },
-
-    zenClass() {
-      if(this.zen)
-        return `--zen`
-      return ''
-    },
-
-    fullscreenClass() {
-      return this.fullscreen ? '--fullscreen' : ''
-    }
 
   }
 

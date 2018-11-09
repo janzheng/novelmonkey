@@ -32,4 +32,22 @@ export default {
     return JSON.stringify(state)
   },
 
+  zenClass(state) {
+    if(state.zen)
+      return `--zen`
+    return ''
+  },
+
+  fullscreenClass(state) {
+    return state.fullscreen ? '--fullscreen' : ''
+  },
+
+  focusedClass(state) {
+    return state.focus ? '--focused' : ''
+  },
+
+  expandClass(state) {
+    return state.expand ? '--grow':''
+  }
+
 }

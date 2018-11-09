@@ -2,10 +2,12 @@
 
   <div class="Home" id="top">
 
-    <div class="Home-intro">
+    <div class="Intro">
+      Dear monkey writer! A redesign was long overdue, but if you like the old version better, you can find the old version at <a href="http://novelmonkey.com/old">http://novelmonkey.com/old</a>
     </div>
 
     <Writer class="--inline" :inline="true" />
+    <Settings :home="true" />
     <div class="BackTop" v-scroll-to="'#top'" v-if="showBackTop">go back up</div>
 
   </div>
@@ -16,15 +18,27 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Writer from '~/components/Writer'
+import Settings from '~/components/Settings'
 
 let listen
 
 export default {
 
+  head() {
+    return {
+      link: [
+        { rel: 'icon', type: 'image/png', href: this.iconName },
+        // { rel: 'icon', type: 'image/png', href: 'banana.png' }
+
+      ]
+    }
+  },
+
   components: {
     Writer,
+    Settings
   },
 
   layout: 'contentframe',
@@ -51,11 +65,12 @@ export default {
   },
   
   mounted: function () {
-    console.log('mounted')
+    // console.log('mounted')
+  
 
-    if(listen) {
-      console.log('listen already exist!?')
-    }
+    // if(listen) {
+    //   console.log('listen already exist!?')
+    // }
     
     let listen = document.addEventListener('keydown', (e) => {
 
@@ -81,14 +96,24 @@ export default {
   computed: {
     ...mapState([
       'Content',
-      'session'
+      'session',
       ]),
+
+    ...mapGetters([
+      'lightModeName',
+      ]),
+
 
     showBackTop() {
       if(this.session.length > 5)
         return true
       // don't show back top if no content
     },
+
+    iconName() {
+      return `/icon_${this.lightModeName}.png`
+    },
+
   },
 
   methods: {

@@ -58,6 +58,7 @@ $writer-radius: $size-half;
 
 
 .Renderer {
+
   &.--zen {
     // this is required to make it feel clickable during zen
     // since you click to turn off zen mode 
@@ -65,6 +66,27 @@ $writer-radius: $size-half;
   }
 }
   .Renderer-menu {
+    margin-bottom: $size-4;
+    z-index: 200;
+    opacity: 1;
+
+    input {
+      color: v(input-color);
+      background-color: v(writer-input-bg);
+      &:focus, &:active {
+        border-color: v(input-border);
+      }
+    }
+
+    @include input-placeholder {
+      color: v(input-color-placeholder);
+    }
+
+    // input focused should lighten the menu
+    &.--focused {
+      opacity: v(input-focus-opacity);
+    }
+
     @include screen-sm {
       position: sticky;
       top: $size-half;
@@ -72,10 +94,6 @@ $writer-radius: $size-half;
     @include screen-xs {
       display: block;
     }
-
-    margin-bottom: $size-4;
-    opacity: 0.2;
-    z-index: 200;
 
     // annoying going from regular to full screen, menu will slowly move right: 
     // this can probably be fixed with better design later
@@ -171,11 +189,8 @@ $writer-radius: $size-half;
   }
 
   .Renderer-content {
-    &,*{
-      // transition: unset !important;
-      // -webkit-transition: unset !important;
-    }
 
+    color: v(writer-color);
     padding-bottom: $size-3;
     text-shadow: none;
 
@@ -201,7 +216,7 @@ $writer-radius: $size-half;
 // used to place the scroll-to position
 .Writer-bottom {
   position: absolute;
-  bottom: -120px;
+  bottom: -110px;
 }
 
 
@@ -295,6 +310,10 @@ $writer-radius: $size-half;
       color: v(input-color);
       border-color: v(input-border);
 
+      @include input-placeholder {
+        color: v(input-color-placeholder);
+      }
+
       & {
         // @extend %ease;
         background-color: v(writer-input-bg);
@@ -326,7 +345,8 @@ $writer-radius: $size-half;
 
       // position: fixed;
       width: 100%;
-      bottom: 100px; // 14%;
+      // bottom: 100px; // 14%;
+      bottom: 40%;
       left: 0;
       margin: 0 auto;
       // padding: 5%;
@@ -341,7 +361,7 @@ $writer-radius: $size-half;
         }
       }
         &.--serif { input {
-            font-size: usetheme(input-size-zen-serif, $novelmonkey);
+          font-size: usetheme(input-size-zen-serif, $novelmonkey);
         }}
     }
 

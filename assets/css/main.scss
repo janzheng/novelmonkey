@@ -56,24 +56,28 @@ p, ul {
 :root {
   // @include themevars($colors_); // add the standard theme to cssvar color list
 
-  .--daylight, .--twilight {
+  // default
+  // .--daylight {
     @include themevars($daylight);
-
     &,* {
-      // @extend %ease-xslow;
       @include themeease();
+      @include selection-color(v(input-select-bg), v(input-select-color), none);
     }
+  // }
+  .--twilight {
+    @include themevars($twilight);
+    &,* {@include themeease();}
   }
-
   .--moonlight {
-    @include themevars($moonlight); 
-
-    &,* {
-      // @extend %ease-xslow;
-      // @include ease($speed-xslow, background-color);
-      @include themeease();
-    }
+    @include themevars($moonlight);
+    &,* {@include themeease();}
   }
+  .--dawnlight { // classic novelmonkey 2 colors
+    @include themevars($dawnlight);
+    &,* {@include themeease();}
+  }
+
+
 }
 
 
@@ -185,6 +189,27 @@ a {
 
 
 
+.Intro {
+  @extend .Writer;
+  min-height: inherit;
+  height: inherit;
+  margin-bottom: $size;
+  // background-color: v(writer-bg);
+  // color: v(writer-color);
+  // border-radius: $radius;
+  // padding: $size-half $size;
+  // margin: 0 auto;
+  // max-width: $writer-width;
+  // padding: $size $size-2;
+  // @extend ._depth-400;
+
+  a {
+    color: v(ui-color);
+    &:hover {
+      color: v(active-color);
+    }
+  }
+}
 
 
 /* 

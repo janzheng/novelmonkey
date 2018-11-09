@@ -10,14 +10,6 @@
 @import '/components/writer';
 
 
-button, ._button {
-	&.--text {
-		&:hover {
-			color: v(active) !important; // text color uses --active
-		}
-	}
-}
-
 
 .BackTop {
 	text-align: center;
@@ -25,8 +17,11 @@ button, ._button {
 	margin-top: $size-4;
 	margin-bottom: $size-4;
 	cursor: pointer;
+  color: v(ui-color);
+
 	&:hover {
-		text-decoration: underline;
+		text-decoration: none;
+  	color: v(active-color);
 	}
 }
 
@@ -47,18 +42,69 @@ button, ._button {
 
 
 // note: toasted isn't wrapped inside --day or --night!!
-// .toasted {
-//   &.primary.success {
-//     background-color: v(alert-bg) !important;
-//     color: v(alert-text) !important;
-//   }
-// }
+.toasted {
+	background-color: v(alert-bg);
+	color: v(alert-text);
+	padding: $size-half $size-half !important;
+	border-radius: $radius;
+}
 
+
+
+// this is the wordcount + other things hovering over input
+.Data {
+	color: v(data-color);
+	cursor: pointer;
+	position: relative;
+	font-size: usetheme(data-counter-size, $novelmonkey);
+
+	&.--half {
+		opacity: 0.5;
+	}
+	&.--none {
+		opacity: 0;
+		&:hover {
+			opacity: 0.2;
+		}
+	}
+
+	.SessionData {
+		position: absolute;
+		text-align: center;
+		font-size: inherit;
+		bottom: $size-2;
+		width: 100%;
+	}
+
+	&.--zen.--full {
+		font-size: usetheme(data-counter-size-full-zen, $novelmonkey);
+		&.--serif {
+			font-size: usetheme(data-counter-size-full-zen-serif, $novelmonkey);
+		}
+	}
+	&.--serif {
+		font-size: usetheme(data-counter-size-serif, $novelmonkey);
+	}
+
+}
+
+
+
+
+// menu buttons for both .Menu and .Settings
+button, ._button {
+	&.--text {
+		color: v(ui-color);
+		&:hover {
+			color: v(active-color) !important; // text color uses --active
+		}
+	}
+}
 
 // Menu that's sitting in the renderer
 // the header menu is called "settings" and will probably be a flyout over time
 .Menu {
-	
+
   button.--text {
     padding-left: $size/4;
     padding-right: $size/4;
@@ -77,22 +123,22 @@ button, ._button {
   }
   .Menu-inset {
   	display: inline-block;
+    background: v(inset-color-bg);
+    border-radius: $radius;
+    padding-left: $size-half;
+    padding-right: $size-half;
   }
 
 
-// this is the wordcount + other things hovering over input
-.Data {
-	&.--half {
-		opacity: 0.5;
+.Settings {
+	&.--home {
+		// settings menu below the writer
+		margin-top: $size-6;
+		margin-bottom: $size-4;
+		text-align: center;
 	}
-	&.--none {
-		opacity: 0;
-		&:hover {
-			opacity: 0.2;
-		}
-	}
-
 }
+
 
 
 

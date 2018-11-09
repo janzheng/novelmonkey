@@ -9,6 +9,8 @@
     <div>
       <input ref="textInput" v-model.trim="inputString" class="Header-search _form-input --width-full" type="text" name="textInput" id="searchbar" placeholder="Write something magical" @input="textEntry" 
       :class="typeface"
+      @focus="inputFocused"
+      @blur="inputBlurred"
       @keydown.enter.prevent="commitFragment"
       @keydown.alt.s.prevent="save"
       @keydown.ctrl.s.prevent="save"
@@ -61,7 +63,6 @@ export default {
       if(!this.expand && !this.fullscreen) {
         scrollToWriterBottom(this)
       } else {
-        console.log('fscmt')
         // when full-screen, scroll the writer element to bottom
         scrollToFullscreenBottom(this)
       }
@@ -76,6 +77,14 @@ export default {
         }
       }) // required bc dispatch updates this component
 
+    },
+
+    inputFocused() {
+      this.$store.commit('setInputFocused')
+    },
+
+    inputBlurred() {
+      this.$store.commit('setInputUnfocused')
     },
 
     // v1: since we don't have saving, download a file
