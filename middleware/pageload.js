@@ -78,8 +78,11 @@ export default function ({route, env, store, isMobileOrTablet, isMobile}) {
   const now = new Date
   const nowHour = now.getHours()
   // 12pm-7am is moonlight (no lights, pitch dark room)
-  if (nowHour < 7) {
+  if (nowHour < 5) {
     store.dispatch('toggleLight',2)
+  }
+  else if (nowHour < 10) {
+    store.dispatch('toggleLight',3)
   }
   else if (nowHour > 18) {
     // 6pm-12pm is twilight (evening, lights on)

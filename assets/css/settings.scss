@@ -161,6 +161,7 @@ $novelmonkey: (
 // high contrast, avoid soft colors
 $daylight: (
   bg-color: usetheme(blue-light, $novelmonkey),
+  menu-bg: rgba(usetheme(whiter_a, $novelmonkey), 0.8),
 
   footer-color-bg: color(usetheme(blue-light, $novelmonkey), 110),
   footer-color: usetheme(black, $novelmonkey),
@@ -202,6 +203,7 @@ $daylight: (
 // evening colors; house lights, dark outside
 $twilight: (
   bg-color: usetheme(blue-200, $novelmonkey),
+  menu-bg: rgba(usetheme(blue-100, $novelmonkey), 0.8),
 
   footer-color-bg: usetheme(blue-0, $novelmonkey),
   footer-color: usetheme(gray, $colors_),
@@ -229,7 +231,7 @@ $twilight: (
 
   // inputs
   input-bg: rgba(21,21,31,0.8),
-  input-bg-active: usetheme(blue-500, $colors_),
+  input-bg-active: rgba(21,21,31,0.93),
   input-color: usetheme(blue-500, $novelmonkey),
   input-color-placeholder: usetheme(blue-400, $novelmonkey),
   input-border: usetheme(blue, $novelmonkey),
@@ -243,6 +245,7 @@ $twilight: (
 // no lights, dark room, moon shining in
 $moonlight: (
   bg-color: usetheme(pureblack, $colors_),
+  menu-bg: rgba(usetheme(black-50, $novelmonkey), 0.8),
 
   footer-color-bg: usetheme(black-50, $novelmonkey),
   footer-color: usetheme(gray-dark, $colors_),
@@ -260,6 +263,7 @@ $moonlight: (
   // context colors 
   active-color: usetheme(red-400, $novelmonkey),
   data-color: usetheme(red-100, $novelmonkey),
+  data-bg: rgba(usetheme(whiter_a, $novelmonkey), 0.3),
 
   // renderer colors
   // paper / text
@@ -270,7 +274,7 @@ $moonlight: (
 
   // inputs
   input-bg: rgba(9,6,6,0.7),
-  input-bg-active: usetheme(red-100, $colors_),
+  input-bg-active: rgba(5,3,2,0.83),
   input-color: usetheme(red-400, $novelmonkey),
   input-color-placeholder: usetheme(red-100, $novelmonkey),
   input-border: usetheme(red-100, $novelmonkey),
@@ -301,6 +305,7 @@ $dawnlight: ( // novelmonkey2 colors
   // context colors 
   active-color: color(usetheme(red, $novelmonkey), 120),
   data-color: usetheme(red, $novelmonkey),
+  data-bg: rgba(usetheme(whiter_a, $novelmonkey), 0.8),
 
   // renderer colors
   // paper / text

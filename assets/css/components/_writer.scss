@@ -24,6 +24,7 @@ $writer-radius: $size-half;
 
 
   // @extend %ease-fast;
+  // expanded view
   &.--grow {
     @extend %ease-fast;
     position: fixed;
@@ -66,6 +67,7 @@ $writer-radius: $size-half;
   }
 }
   .Renderer-menu {
+    background-color: v(menu-bg);
     margin-bottom: $size-4;
     z-index: 200;
     opacity: 1;
@@ -191,7 +193,7 @@ $writer-radius: $size-half;
   .Renderer-content {
 
     color: v(writer-color);
-    padding-bottom: $size-3;
+    padding-bottom: 110px; // leave room for the word counter
     text-shadow: none;
 
     // magical # for now
@@ -216,7 +218,7 @@ $writer-radius: $size-half;
 // used to place the scroll-to position
 .Writer-bottom {
   position: absolute;
-  bottom: -110px;
+  bottom: -200px;
 }
 
 
@@ -310,17 +312,19 @@ $writer-radius: $size-half;
       color: v(input-color);
       border-color: v(input-border);
 
+      // @extend %ease;
+      background-color: v(writer-input-bg);
+      height: usetheme(input-height, $novelmonkey);
+      @extend %ease-fast;
+      transition-property: height;
+      
       @include input-placeholder {
         color: v(input-color-placeholder);
       }
 
       & {
-        // @extend %ease;
-        background-color: v(writer-input-bg);
-        height: usetheme(input-height, $novelmonkey);
-        @extend %ease-fast;
-        transition-property: height;
       }
+
       &:hover {
         background-color: v(input-bg-active);
         border-color: v(input-border-hover);

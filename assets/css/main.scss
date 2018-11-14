@@ -40,7 +40,7 @@ p, ul {
 
 @mixin themeease() {
   @include ease($speed-xslow);
-  transition-property: background-color, opacity, width, top, left, padding, margin;
+  transition-property: background-color, border-color, opacity, width, top, left, padding, margin;
   // exclude: line-height, font-size;
 
 
@@ -194,8 +194,8 @@ a {
   min-height: inherit;
   height: inherit;
   margin-bottom: $size;
-  // background-color: v(writer-bg);
-  // color: v(writer-color);
+  background-color: v(writer-bg);
+  color: v(writer-color);
   // border-radius: $radius;
   // padding: $size-half $size;
   // margin: 0 auto;
@@ -233,4 +233,24 @@ $depth_: (
   box-shadow: usetheme(400, $depth_);
 }
 
+
+#drift-widget-container {
+  position: relative !important;
+}
+#drift-widget {
+  position: absolute !important;
+  // right: 5% !important; 
+  bottom: 300px !important;
+
+  @include screen-xs {
+    bottom: 0 !important;
+  }
+}
+  .CHAT {
+    background-color: red !important;
+
+    svg {
+      fill: blue !important;
+    }
+  }
 

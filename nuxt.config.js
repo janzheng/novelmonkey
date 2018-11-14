@@ -15,11 +15,11 @@ const site_url = 'https://novelmonkey.com'
 const site_name = 'novel monkey';
 const site_twitter = '@novelmonkey';
 const site_twitter_creator = '@janistanian';
-const site_color = '#374F6A';
+const site_color = '#F3FBFD';
 const site_title = 'novel monkey';
 const site_description = 'A writing tool that "takes the intimidation away from staring at the blank page".';
 
-const site_ico = '/icon_sm.png';
+const site_ico = '/icon.png';
 const site_image = '/share_img.png';
 const site_search = 'index,follow';
 const site_author = 'Jan Zheng';
@@ -27,7 +27,7 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
-const offline = true;
+const offline = false;
 const mode = 'spa' // loads airtable dynamically
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
 
@@ -248,6 +248,7 @@ module.exports = {
     { src: '~/plugins/date.js' },
     { src: '~/plugins/clipboard.js' },
     { src: '~/plugins/fscreen.js' },
+    { src: '~/plugins/filters.js' },
     // { src: '~/plugins/scrollto.js' },
   ],
 
@@ -269,19 +270,26 @@ module.exports = {
     // '@nuxtjs/manifest',
   ],
 
-  // manifest: {
-  //   name: 'novel monkey',
-  //   short_name: 'novlmnky',
-  //   display: 'standalone',
-  //   start_url: 'https://novelmonkey.surge.sh/',
-  //   theme_color: site_color,
-  //   background_color: '#FFF',
-  //   lang: 'en',
-  //   // icons: PWAIcons
-  // },
+  manifest: {
+    name: 'novel monkey',
+    short_name: 'novelmonkey',
+    display: 'standalone',
+    start_url: 'https://novelmonkey.com/',
+    theme_color: site_color,
+    background_color: '#333333',
+    lang: 'en',
+    // icons: PWAIcons
+  },
 
   workbox: {
     runtimeCaching: [
+    
+      {
+          urlPattern: 'https://api.airtable.com/v0/app0IDN4GEAPBNEjh/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+      },
       {
           urlPattern: 'https://fonts.googleapis.com/.*',
           handler: 'cacheFirst',

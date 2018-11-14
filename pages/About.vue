@@ -2,7 +2,7 @@
 
   <div class="About _margin-top-2 _margin-bottom-2">
     <section class="narrow copy _margin-center">
-      <div class="About-bg">
+      <div class="About-bg Writer Renderer-content">
         <p class="_font-serif" v-html="$md.render(aboutBg || '')"></p>
       </div>
 

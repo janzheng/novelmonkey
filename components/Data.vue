@@ -4,8 +4,8 @@
 <template>
   <div class="Data" :class="[typeface,styleClass,zenClass]" @click="toggleStyle"
   >
-    <div class="SessionData">
-      {{ activeCount }}
+    <div class="Data-container">
+      <div class="Data-active">{{ activeCount | comma}}</div>
     </div>
   </div>
 </template>

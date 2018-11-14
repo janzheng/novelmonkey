@@ -52,11 +52,11 @@
 
 
 // this is the wordcount + other things hovering over input
+
 .Data {
 	color: v(data-color);
 	cursor: pointer;
 	position: relative;
-	font-size: usetheme(data-counter-size, $novelmonkey);
 
 	&.--half {
 		opacity: 0.5;
@@ -68,12 +68,22 @@
 		}
 	}
 
-	.SessionData {
+	.Data-container {
 		position: absolute;
 		text-align: center;
 		font-size: inherit;
 		bottom: $size-2;
 		width: 100%;
+		margin: 0 auto;
+	}
+
+	.Data-active {
+		// padding: $size;
+		border-radius: $radius;
+		background-color: v(menu-bg);
+		font-size: usetheme(data-counter-size, $novelmonkey);
+    margin: 0 auto;
+    display: inline;
 	}
 
 	&.--zen.--full {

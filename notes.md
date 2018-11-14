@@ -9,6 +9,8 @@ Novelmonkey 3 (vue) Notes
 
 ## Todo
 
+- add a background color to wordcounter and renderer menu, hard to see esp. in dark mode
+- hovering mouse over renderer should show menu, even under focus
 - airtable Q&A box? maybe just email for now
 - scroll smooth doesn't work for a lot of browsers, maybe still need scrollto
 - dynamic icons based on current mood color
@@ -37,10 +39,25 @@ Novelmonkey 3 (vue) Notes
 
 
 
+## Next
 
 
 
-## Later
+
+
+## Future
+
+- calm writing app additions (sounds, visuals, games)
+- livestream writing
+- writing competitions (either just show metrics / like racing game) or actually see what they're writing
+- iA-writer & novlr features
+  - folders, different writings
+  - connect to dropbox?
+  - server ($3/mo or $30/yr) for persistence across devices
+
+
+
+
 
 
 ## Planning
