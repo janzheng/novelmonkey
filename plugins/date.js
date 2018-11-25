@@ -1,5 +1,5 @@
 
-// import Vue from 'vue'
+import Vue from 'vue'
 // import moment from 'moment'
 import dayjs from 'dayjs'
 

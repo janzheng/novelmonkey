@@ -200,7 +200,7 @@ These are things that probably shouldn't be built (as part of MVP), but are fun 
   - Added a tiny but important change to mutate/update on 'typeof'
   - changed linting 
     - "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-
+  - turned on analyzer
 
 
 
