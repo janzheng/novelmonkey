@@ -11,8 +11,8 @@ export default ({ app }, inject) => {
     linkify: true,
     breaks: true,
   })
-  md.use(require('markdown-it-attrs'))
-  md.use(require('markdown-it-attrs'), {leftDelimiter: '[', rightDelimiter: ']'})
+  // md.use(require('markdown-it-attrs'))
+  // md.use(require('markdown-it-attrs'), {leftDelimiter: '[', rightDelimiter: ']'})
   // md.use(require('markdown-it-attrs'), {
   //   leftDelimiter: '[',
   //   rightDelimiter: ']'

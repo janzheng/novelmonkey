@@ -1,3 +1,14 @@
+assets/*
+static/*
+nuxt.config.js
+other/*
+
+
+
+
+
+# from .gitignore
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs

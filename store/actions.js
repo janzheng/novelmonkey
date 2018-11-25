@@ -1,9 +1,10 @@
 
 // import Cytosis from 'cytosis'
-import fscreen from 'fscreen'
+// import fscreen from 'fscreen'
 import Cytosis from '~/other/cytosis'
 import _ from 'lodash'
-import moment from 'moment'
+// import moment from 'moment'
+import dayjs from 'dayjs'
 
 import { scrollToWriterBottom, scrollToFullscreenBottom } from '~/assets/helpers'
 
@@ -70,7 +71,7 @@ export default {
     if (state.typeface == state.typefaces.length-1 )
       typeface = 0
 
-    console.log('typeface:',typeface);
+    console.log('typeface:',typeface)
 
     // if pass in a number, ignore everything else
     if (el)
@@ -91,22 +92,26 @@ export default {
       sessionCount: state.sessionCount,
       sessionName: state.sessionName,
     })
-    const blob = new Blob([data], {type: "octet/stream"})
+    const blob = new Blob([data], {type: 'octet/stream'})
 
-    const now = moment(Date.now()).format('MM-DD-YY_HH.mm')
+    // const now = moment(Date.now()).format('MM-DD-YY_HH.mm')
+
+    let now = dayjs(Date.now()).format('MM-DD-YY_HH.mm')
+    // now = `${now.getMonth()+1}-${now.getDate()}-${now.getFullYear()}-
+
     console.log('save:',now)
 
     const a = document.createElement("a")
     document.body.appendChild(a)
-    a.style = "display: none"
+    a.style = 'display: none'
 
     const sessionName = state.sessionName || state.defaultName
 
     const url = window.URL.createObjectURL(blob)
-      a.href = url
-      a.download = `${sessionName}_${state.sessionCount}w_${now}.save` // filename
-      a.click()
-      window.URL.revokeObjectURL(url)
+    a.href = url
+    a.download = `${sessionName}_${state.sessionCount}w_${now}.save` // filename
+    a.click()
+    window.URL.revokeObjectURL(url)
   },
 
   localSave({ state }) {
@@ -125,7 +130,8 @@ export default {
     //   session: state.session,
     //   sessionCount: state.sessionCount,
     // })
-    if (!!raw) {
+    // if (!!raw) { /eslinted
+    if (raw) {
       const data = JSON.parse(raw) || {}
       commit('restore', data)
     }
@@ -153,13 +159,13 @@ export default {
   // file loading example
   // https://codepen.io/nguernse/pen/JyYdNY
   loadFiles({ commit, dispatch }, files) {
-    var reader = new FileReader();
+    var reader = new FileReader()
     reader.onload = function(e) {
-      var content = e.target.result;
+      var content = e.target.result
       console.log('file content:', content)
       dispatch('loadData', content)
-    };
-    reader.readAsText(files[0], "UTF-8");
+    }
+    reader.readAsText(files[0], 'UTF-8')
   },
 
   // focus on input, passed in as a ref (optional)
@@ -208,7 +214,7 @@ export default {
 
 // Helper methods
 const emit = function (evtName, data) { // replaces entire dance object
-  window.dispatchEvent( new CustomEvent(evtName, {detail: data}));
+  window.dispatchEvent( new CustomEvent(evtName, {detail: data}))
 }
 
 const debouncedUpdate = _.debounce(function(commit, object){

@@ -1,6 +1,6 @@
 
 import _ from 'lodash'
-import { count, addCommas } from '~/assets/helpers.js'
+import { count } from '~/assets/helpers.js'
 
 
 export default { 
@@ -16,8 +16,8 @@ export default {
     // future (multiple):  [{stateName: payloadobject}, {stateName: payloadobject})
     // console.log('mutate update')
 
-    if (typeof(payload) == 'array') {
-      for (n of payload) {
+    if ( !!payload && payload.length) {
+      for (let n of payload) {
         // type 2: array of key/val pairs
         const name = Object.keys(payload)[n][0]
         const value = Object.values(payload)[n][0]
@@ -35,11 +35,6 @@ export default {
       const value = Object.values(payload)[0]
 
       // type 2: name is "fruit.orange" we only want to edit the orange
-      /*
-        _this.$store.dispatch('update', {
-            "enums.OVERFLOW": value
-          }, true)
-      */
       if(name.indexOf('.') > 0) {
         let substate = state
         let nameList = name.split('.')
@@ -79,7 +74,7 @@ export default {
     // console.log('UPDATECREATE', payload)
 
     // iterator 
-    Object.keys(payload).map((name, i) => {
+    Object.keys(payload).map((name) => {
       // const value = Object.values(payload)[0]
       // preserve things like functions, not just data w/ object.create
       state[name] = payload[name]
@@ -92,7 +87,6 @@ export default {
   },
   // clear (or reset) an object (esp. used on update)
   clear (state, {name}) {
-    debug('Store.clear', 'Clearing:', name)
     if(state[name] !== undefined) {
       state[name] = undefined
     }

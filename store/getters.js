@@ -34,7 +34,7 @@ export default {
 
   zenClass(state) {
     if(state.zen)
-      return `--zen`
+      return '--zen'
     return ''
   },
 

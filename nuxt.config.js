@@ -1,9 +1,4 @@
-
-// note: nuxt requires Node 8+ to run properly 
-
-
-
-
+const pkg = require('./package')
 
 
 // https://github.com/joshbuchea/HEAD  https://gethead.info/
@@ -33,7 +28,6 @@ const mode = 'spa' // loads airtable dynamically
 
 
 module.exports = {
-  // mode: 'universal', // use this for deployment; need to rebuild the site every time airtable content changes
   offline: offline,
   mode: mode, // for development, or for real-time airtable changes
   env: {
@@ -46,28 +40,11 @@ module.exports = {
     ext_handler: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input'
   },
 
-  render: {
-    // https://nuxtjs.org/api/configuration-render#resourcehints
-    // disable prefetch of all the pages; saves bg download data
-    // resourceHints: false,
-
-    // Content-Security-Policy
-    // https://nuxtjs.org/api/configuration-render#csp
-    // csp: {
-    //   hashAlgorithm: 'sha256',
-    //   allowedSources: undefined,
-    //   policies: undefined
-    // }
-
-  },
-
-
-
   /*
-      Headers of the page
-      'hid' is a 'head identifier' and used as a unique key
+  ** Headers of the page
   */
   head: {
+    // title: pkg.name,
     title: site_title,
     meta: [
 
@@ -139,98 +116,20 @@ module.exports = {
     ],
   },
 
-
-
-
-
-
-
-      /* 
-          Esoterica
-          https://gethead.info/#recommended-minimum
-
-          <!-- Allows control over how referrer information is passed -->
-          { hid: 'referrer', name: 'referrer', content: 'no-referrer' },
-
-          <!-- Disable automatic detection and formatting of possible phone numbers -->
-          { hid: 'format-detection', name: 'format-detection', content: 'telephone=no' },
-
-          <!-- Specifies the document to appear in a specific frame -->
-          { hid: 'http-equiv', http-equiv: 'Window-Target', content: '_value' },
-
-          <!-- Geo tags https://en.wikipedia.org/wiki/ICBM_address#Modern_use -->
-          <meta name="ICBM" content="latitude, longitude">
-          <meta name="geo.position" content="latitude;longitude">
-          <meta name="geo.region" content="country[-state]"><!-- Country code (ISO 3166-1): mandatory, state code (ISO 3166-2): optional; eg. content="US" / content="US-NY" -->
-          <meta name="geo.placename" content="city/town"><!-- eg. content="New York City" -->
-    
-      */
-      // { hid: 'referrer', name: 'referrer', content: 'no-referrer' },
-      // { hid: 'format-detection', name: 'format-detection', content: 'telephone=no' },
-      // { hid: 'http-equiv', http-equiv: 'Window-Target', content: '_value' },
-
-      // { hid: 'icbm', name: 'ICBM', content: 'latitude, longitude' },
-      // { hid: 'geoposition', name: 'geo.position', content: 'latitude;longitude' },
-      // { hid: 'georegion', name: 'geo.region', content: 'US-NY' },
-      // { hid: 'geoplacename', name: 'geo.placename', content: 'New York City' },
-
-
-      // Link
-      // <!-- Links to an AMP HTML version of the current document -->
-      // <link rel="amphtml" href="http://example.com/path/to/amp-version.html">
-      // { hid: 'amphtml', rel: 'amphtml', href: 'http://example.com/path/to/amp-version.html' },
-
-      // <!-- Links to information about the author(s) of the document -->
-      // <link rel="author" href="humans.txt">
-
-      // <!-- Refers to a copyright statement that applies to the link's context -->
-      // <link rel="license" href="copyright.html">
-
-      // <!-- Gives a reference to a location in your document that may be in another language -->
-      // <link rel="alternate" href="https://es.example.com/" hreflang="es">
-
-      // <!-- Provides information about an author or another person -->
-      // <link rel="me" href="https://google.com/profiles/thenextweb" type="text/html">
-      // <link rel="me" href="mailto:name@example.com">
-      // <link rel="me" href="sms:+15035550125">
-
-      // <!-- The first, last, previous, and next documents in a series of documents, respectively -->
-      // <link rel="first" href="http://example.com/article/">
-      // <link rel="last" href="http://example.com/article/?page=42">
-      // <link rel="prev" href="http://example.com/article/?page=1">
-      // <link rel="next" href="http://example.com/article/?page=3">
-
-      // <!-- Feeds -->
-      // <link rel="alternate" href="https://feeds.feedburner.com/example" type="application/rss+xml" title="RSS">
-      // <link rel="alternate" href="http://example.com/feed.atom" type="application/atom+xml" title="Atom 0.3">
-
-      // <!-- Prefetching, preloading, prebrowsing -->
-      // <!-- More info: https://css-tricks.com/prefetching-preloading-prebrowsing/ -->
-      // <link rel="dns-prefetch" href="//example.com/">
-      // <link rel="preconnect" href="https://www.example.com/">
-      // <link rel="prefetch" href="https://www.example.com/">
-      // <link rel="prerender" href="http://example.com/">
-      // <link rel="preload" href="image.png" as="image">
-
-
-
-
-
-
-
-
-
-
-
   /*
-  ** Customize the progress bar color
+  ** Customize the progress-bar color
   */
   loading: { color: site_color },
+
   /*
-  ** Build configuration
+  ** Global CSS
   */
+  css: [
+  ],
 
-
+  /*
+  ** Plugins to load before mounting the App
+  */
   plugins: [
     // '~plugins/filters.js',
     // '~plugins/vue-highlightjs.js',
@@ -252,6 +151,9 @@ module.exports = {
     // { src: '~/plugins/scrollto.js' },
   ],
 
+  /*
+  ** Nuxt.js modules
+  */
   modules: [
     // '@nuxtjs/font-awesome',
     ['@nuxtjs/google-analytics', {
@@ -305,62 +207,50 @@ module.exports = {
     ]
   },
 
-  // markdownit: {
-  //   // preset: 'default',
-  //   injected: false, // markdownit.js plugin takes over injection
-  //   // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
-  //   // use the custom plugin/markdownit to inject properly; the official thing is broken
-  //   // injected: true, // commented out to allow attrs in lang="md" blocks
-  //   // BUG: in @nuxtjs/markdownit/index.js: this needs to be set: 
-  //   //      options: Object.assign({}, options, this.options.markdownit)
-  //   //      this allows lang="md" to continue processing plugins like markdown-it-attrs, otherwise it doesn't do that anymore
-  //   // otherwise plugins will break
-  //   html: true,
-  //   typographer: true,
-  //   linkify: true,
-  //   breaks: true,
-  //   use: [
-  //     'markdown-it-attrs',
-  //     ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
-  //   ],
-  // },
-
   toast: { 
     position: 'top-right' 
   },
 
+
+
   build: {
-    styleResources: {
-      options: {
-        // See https://github.com/yenshih/style-resources-loader#options
-        // Except `patterns` property
-      },
-      scss: [
-      // './assets/css/shared.scss' // shared files
-      ],
-    },
+    // styleResources: {
+    //   options: {
+    //     // See https://github.com/yenshih/style-resources-loader#options
+    //     // Except `patterns` property
+    //   },
+    //   scss: [
+    //   // './assets/css/shared.scss' // shared files
+    //   ],
+    // },
+    analyze: true,
 
     babel: {
-      presets: ['es2015', 'stage-2'],
-      plugins: ["transform-vue-jsx", "transform-runtime", "transform-object-rest-spread"],
+      presets: [
+        ['@babel/preset-env', {
+          useBuiltIns: 'usage'
+        }]
+      ], //['es2015', 'stage-2'],
+      plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-transform-typeof-symbol', '@babel/plugin-transform-runtime'],
+    //   plugins: ["transform-vue-jsx", "transform-runtime", "transform-object-rest-spread"],
     },
-    // vendor: ['cytosis'],
-    extend (config, { isDev }) {
-      if (isDev && process.client) {
-        config.module.rules.push(
-        {
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        },
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    },
+    // // vendor: ['cytosis'],
+    // extend (config, { isDev }) {
+    //   if (isDev && process.client) {
+    //     config.module.rules.push(
+    //     {
+    //       enforce: 'pre',
+    //       test: /\.(js|vue)$/,
+    //       loader: 'eslint-loader',
+    //       exclude: /(node_modules)/
+    //     },
+    //     {
+    //       test: /\.js$/,
+    //       loader: 'babel-loader',
+    //       exclude: /(node_modules)/
+    //     })
+    //   }
+    // },
     // postcss: false,
     // this enables cssvars
     postcss: [
@@ -400,10 +290,4 @@ module.exports = {
   generate: {
     fallback: true, // if you want to use '404.html'
   },
-
 }
-
-
-
-
-

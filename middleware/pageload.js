@@ -12,7 +12,8 @@ import _ from 'lodash'
 
 export function loadStatic(env, store, routeName='') {
   let data
-  if(store.state && !!!store.state.Content) {
+  // if(store.state && !!!store.state.Content) { // eslinted
+  if(store.state && !store.state.Content) {
     data = store.dispatch('loadCytosis', {
       env,
       tableIndex: 'static',
@@ -31,23 +32,23 @@ async function loadDataOnServer(routeName, store, env) {
 
   // if universal mode, don't load data when not server
   if(process.mode == 'universal' && !process.server)
-    return false;
+    return false
 
   console.log('loading cytosis. Data:', `Content:${!!store.state.Content}, Orgs:${!!store.state.Organizations}`)
-  // if(process.server) {
+    // if(process.server) {
     // checks to prevent over-eager fetching?
     let staticData, dynamicData, newsData
 
     staticData = loadStatic(env, store, routeName)
 
     return Promise.all([staticData, dynamicData])
-  // }
+    // }
 }
 
 
 
 export default function ({route, env, store, isMobileOrTablet, isMobile}) {
-  const routeName = route.name;
+  const routeName = route.name
   // console.log('pageload ctx:', context);
 
   // if(routeName != 'phages' && routeName != 'labs') {
