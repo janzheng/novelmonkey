@@ -1,10 +1,11 @@
 <template>
 
   <div class="Home" id="top">
-
+<!-- 
     <div class="Intro">
       Dear monkey writer! A redesign was long overdue, but if you like the old version better, you can find the old version at <a href="http://novelmonkey.com/old">http://novelmonkey.com/old</a>
     </div>
+ -->
 
     <Writer class="--inline" :inline="true" />
     <Settings :home="true" />

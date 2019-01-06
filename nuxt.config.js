@@ -22,6 +22,7 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
+const analyze = false;
 const offline = false;
 const mode = 'spa' // loads airtable dynamically
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
@@ -37,7 +38,7 @@ module.exports = {
     airtable_api: 'keyAe6M1KoPfg25aO',  // cytosisreader@zeee.co handler
     airtable_base: 'app0IDN4GEAPBNEjh',
     site_policy: site_policy,
-    ext_handler: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input'
+    ext_handler: ''
   },
 
   /*
@@ -214,45 +215,16 @@ module.exports = {
 
 
   build: {
-    // styleResources: {
-    //   options: {
-    //     // See https://github.com/yenshih/style-resources-loader#options
-    //     // Except `patterns` property
-    //   },
-    //   scss: [
-    //   // './assets/css/shared.scss' // shared files
-    //   ],
-    // },
-    analyze: true,
+    analyze: analyze,
 
     babel: {
       presets: [
         ['@babel/preset-env', {
           useBuiltIns: 'usage'
         }]
-      ], //['es2015', 'stage-2'],
+      ],
       plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-transform-typeof-symbol', '@babel/plugin-transform-runtime'],
-    //   plugins: ["transform-vue-jsx", "transform-runtime", "transform-object-rest-spread"],
     },
-    // // vendor: ['cytosis'],
-    // extend (config, { isDev }) {
-    //   if (isDev && process.client) {
-    //     config.module.rules.push(
-    //     {
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     },
-    //     {
-    //       test: /\.js$/,
-    //       loader: 'babel-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // },
-    // postcss: false,
-    // this enables cssvars
     postcss: [
       require('postcss-cssnext')({
         features: {

@@ -42,7 +42,23 @@ $width-xs-max: 583px    !default;
 $width-sm-min: 584px    !default;
 
 
-@import '../../node_modules/coeur/styles/index.scss';
+// @import '../../node_modules/coeur/styles/index.scss';
+
+// selective import for space saving
+@import '../../node_modules/coeur/styles/_heart.scss';
+@import '../../node_modules/coeur/styles/_head.scss';
+// @import '../../node_modules/coeur/styles/_neck.scss';
+// @import '../../node_modules/coeur/styles/_body.scss';
+@import '../../node_modules/coeur/styles/_neck-buttons.scss';
+@import '../../node_modules/coeur/styles/_neck-layout.scss';
+@import '../../node_modules/coeur/styles/_neck-design.scss';
+@import '../../node_modules/coeur/styles/_neck-links.scss';
+@import '../../node_modules/coeur/styles/_body-card.scss';
+@import '../../node_modules/coeur/styles/_body-forms';  
+
+
+// re-import for cascade
+// @import '../../node_modules/coeur/styles/_heart.scss';
 
 
 
@@ -151,6 +167,7 @@ $novelmonkey: (
   data-counter-size-serif: $size-5,
   data-counter-size-full-zen: $size-5,
   data-counter-size-full-zen-serif: $size-6,
+
 );
 // @include colorate($novelmonkey);
 
@@ -164,7 +181,7 @@ $daylight: (
   menu-bg: rgba(usetheme(whiter_a, $novelmonkey), 0.8),
 
   footer-color-bg: color(usetheme(blue-light, $novelmonkey), 110),
-  footer-color: usetheme(black, $novelmonkey),
+  footer-color: usetheme(black, $colors_),
   footer-color-link: usetheme(blue, $colors_),
   footer-color-link-hover: usetheme(blue-300, $colors_),
 
@@ -173,8 +190,8 @@ $daylight: (
   ui-color: usetheme(black, $novelmonkey),
   logo-color: usetheme(blue-700, $novelmonkey),
 
-  alert-bg: usetheme(blue-dark, $novelmonkey),
-  alert-text: usetheme(black, $colors_),
+  alert-bg: usetheme(blue-700, $novelmonkey),
+  alert-text: usetheme(silver-lighter, $colors_),
 
   // context colors 
   active-color: usetheme(blue, $novelmonkey),
@@ -198,7 +215,9 @@ $daylight: (
   input-focus-opacity: 0.12,
   input-select-color: usetheme(blue, $colors_),
   input-select-bg: usetheme(blue-light, $novelmonkey),
-);
+); 
+// add daylight to heart_ as default / fallback colors
+@include addtheme($daylight);
 
 // evening colors; house lights, dark outside
 $twilight: (

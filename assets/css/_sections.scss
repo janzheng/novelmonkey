@@ -12,7 +12,8 @@
 // article wraps all the content
 article,
 .container {
-  background-color: v(bg-color);
+  // background-color: v(bg-color);
+  @include usevar(background-color, bg-color);
   position: relative;
 
   // @include screen-xs {
@@ -119,18 +120,23 @@ article.narrow {
 
 
 
-
 .Footer {
   // margin-top: $size-5;
   padding-bottom: $size-2;
-  background-color: v(footer-color-bg);
-  color: v(footer-color);
+
+  // color: v(footer-color);
+  @include usevar(color, footer-color);
+
+  // background-color: v(footer-color-bg);
+  @include usevar(background-color, footer-color-bg);
 
   a {
     font-weight: normal;
-    color: v(footer-color-link);
+    // color: v(footer-color-link);
+    @include usevar(color, footer-color-link);
     &:hover {
-      color: v(footer-color-link-hover);
+      // color: v(footer-color-link-hover);
+      @include usevar(color, footer-color-link-hover);
     };
   }
   

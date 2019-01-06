@@ -18,10 +18,12 @@
 	margin-bottom: $size-4;
 	cursor: pointer;
   color: v(ui-color);
+  @include usevar(color, ui-color);
 
 	&:hover {
 		text-decoration: none;
-  	color: v(active-color);
+  	// color: v(active-color);
+  	@include usevar(color, ui-color);
 	}
 }
 
@@ -43,10 +45,20 @@
 
 // note: toasted isn't wrapped inside --day or --night!!
 .toasted {
-	background-color: v(alert-bg);
-	color: v(alert-text);
+	// background-color: v(alert-bg);
+  @include usevar(background-color, alert-bg);
+	// color: v(alert-text);
+  @include usevar(color, alert-text);
 	padding: $size-half $size-half !important;
 	border-radius: $radius;
+
+	// &.--daylight { // need to apply default to --daylight as well, for toasted
+ //    @include themevars($daylight);
+ //    &,* {
+ //      @include themeease();
+ //      @include selection-color(v(input-select-bg), v(input-select-color), none);
+ //    }
+ //  }
 }
 
 
@@ -54,7 +66,8 @@
 // this is the wordcount + other things hovering over input
 
 .Data {
-	color: v(data-color);
+	// color: v(data-color);
+  @include usevar(color, data-color);
 	cursor: pointer;
 	position: relative;
 
@@ -80,7 +93,8 @@
 	.Data-active {
 		// padding: $size;
 		border-radius: $radius;
-		background-color: v(menu-bg);
+		// background-color: v(menu-bg);
+  	@include usevar(background-color, menu-bg);
 		font-size: usetheme(data-counter-size, $novelmonkey);
     margin: 0 auto;
     display: inline;
@@ -104,9 +118,11 @@
 // menu buttons for both .Menu and .Settings
 button, ._button {
 	&.--text {
-		color: v(ui-color);
+		// color: v(ui-color);
+  	@include usevar(color, ui-color);
 		&:hover {
-			color: v(active-color) !important; // text color uses --active
+			// color: v(active-color) !important; // text color uses --active
+  		@include usevar(color, active-color);
 		}
 	}
 }
@@ -133,7 +149,8 @@ button, ._button {
   }
   .Menu-inset {
   	display: inline-block;
-    background: v(inset-color-bg);
+    // background: v(inset-color-bg);
+  	@include usevar(background, inset-color-bg);
     border-radius: $radius;
     padding-left: $size-half;
     padding-right: $size-half;

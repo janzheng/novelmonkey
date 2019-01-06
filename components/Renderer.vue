@@ -49,27 +49,27 @@
 
       <div class="Menu-right _flex-1">
 
-        <button class="_button --text --short _margin-none"
+        <button class="_button --text --short _margin-none-i"
           @click="toggleLightMode"
         >{{lightModeName}}</button>
 
-        <button class="_button --text --short _margin-none "
+        <button class="_button --text --short _margin-none-i "
           @click="toggleExpand"
           v-if="!fullscreen"
         >{{ expandName }}</button>
 
         <div class="Menu-inset">
-          <button class="_button --text --short _margin-none "
+          <button class="_button --text --short _margin-none-i "
             @click="openFullscreen"
             v-if="!fullscreen"
           >fullscreen</button>
 
-          <button class="_button --text --short _margin-none "
+          <button class="_button --text --short _margin-none-i "
             @click="closeFullscreen"
             v-if="fullscreen"
           >exit fullscreen</button>
           
-          <button class="_button --text --short _margin-none "
+          <button class="_button --text --short _margin-none-i "
             @click="toggleZen"
           >{{zenName}}</button>
 

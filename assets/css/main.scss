@@ -42,27 +42,39 @@ p, ul {
   @include ease($speed-xslow);
   transition-property: background-color, border-color, opacity, width, top, left, padding, margin;
   // exclude: line-height, font-size;
-
-
-    // height: 100%;
-    // max-width: 100%;
-    // width: 100%;
-    // top: 0;
-    // left: 0;
-    // z-index: 200;
-
+  // height: 100%;
+  // max-width: 100%;
+  // width: 100%;
+  // top: 0;
+  // left: 0;
+  // z-index: 200;
 }
+
+
+$curtheme: $daylight;
+.test {
+  $curtheme: $daylight;
+  $colortest: usetheme(writer-color, $curtheme);
+  color: $colortest;
+}
+.testone {
+  $curtheme: $moonlight; 
+  $colortest: usetheme(writer-color, $curtheme);
+  color: $colortest;
+}
+
+
 
 :root {
   // @include themevars($colors_); // add the standard theme to cssvar color list
 
   // default
   // .--daylight {
-    @include themevars($daylight);
-    &,* {
-      @include themeease();
-      @include selection-color(v(input-select-bg), v(input-select-color), none);
-    }
+  @include themevars($daylight);
+  &,* {
+    @include themeease();
+    @include selection-color(v(input-select-bg), v(input-select-color), none);
+  }
   // }
   .--twilight {
     @include themevars($twilight);
@@ -109,6 +121,21 @@ h3 {
   }
 }
 
+// links
+a {
+  text-decoration: underline;
+  // text-decoration-color: $color-links;
+  border: 0;
+  position: relative;
+  // color: $color-green;
+  // @extend ._pointer-no_events;
+  // @extend %ease-fast;
+  &:hover {
+    // color: $color-links;
+  }
+}
+
+
 
 
 %links-bg,
@@ -131,33 +158,16 @@ h3 {
 
 
 
-.title {
-  padding-bottom: $size-base;
-}
-.subtitle {
-  &, p {
-    font-size: $size-1;
-    line-height: $size-2;
-    @extend %font-serif;
-  }
-}
-
-
-
-// links
-a {
-  text-decoration: underline;
-  // text-decoration-color: $color-links;
-  border: 0;
-  position: relative;
-  // color: $color-green;
-  // @extend ._pointer-no_events;
-  // @extend %ease-fast;
-  &:hover {
-    // color: $color-links;
-  }
-}
-
+// .title {
+//   padding-bottom: $size-base;
+// }
+// .subtitle {
+//   &, p {
+//     font-size: $size-1;
+//     line-height: $size-2;
+//     @extend %font-serif;
+//   }
+// }
 
 
 
@@ -194,8 +204,11 @@ a {
   min-height: inherit;
   height: inherit;
   margin-bottom: $size;
-  background-color: v(writer-bg);
-  color: v(writer-color);
+  // background-color: v(writer-bg);
+  @include usevar(background-color, writer-bg);
+
+  // color: v(writer-color);
+  @include usevar(color, writer-color);
   // border-radius: $radius;
   // padding: $size-half $size;
   // margin: 0 auto;
@@ -204,9 +217,11 @@ a {
   // @extend ._depth-400;
 
   a {
-    color: v(ui-color);
+    // color: v(ui-color);
+    @include usevar(color, ui-color);
     &:hover {
-      color: v(active-color);
+      // color: v(active-color);
+      @include usevar(color, active-color);
     }
   }
 }

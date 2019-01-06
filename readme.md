@@ -201,6 +201,7 @@ These are things that probably shouldn't be built (as part of MVP), but are fun 
   - changed linting 
     - "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
   - turned on analyzer
+  - reduced size (selective coeur)
 
 
 

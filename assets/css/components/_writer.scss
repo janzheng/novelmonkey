@@ -20,7 +20,8 @@ $writer-radius: $size-half;
   margin: 0 auto;
   padding: $size $size-2;
   border-radius: $writer-radius;
-  background-color: v(writer-bg);
+  // background-color: v(writer-bg);
+  @include usevar(background-color, writer-bg);
 
 
   // @extend %ease-fast;
@@ -67,26 +68,33 @@ $writer-radius: $size-half;
   }
 }
   .Renderer-menu {
-    background-color: v(menu-bg);
+    // background-color: v(menu-bg);
+    @include usevar(background-color, menu-bg);
+
     margin-bottom: $size-4;
     z-index: 200;
     opacity: 1;
 
     input {
-      color: v(input-color);
-      background-color: v(writer-input-bg);
+      // color: v(input-color);
+      @include usevar(color, input-color);
+      // background-color: v(writer-input-bg);
+      @include usevar(background-color, background-bg);
       &:focus, &:active {
         border-color: v(input-border);
+        @include usevar(border-color, input-border);
       }
     }
 
     @include input-placeholder {
-      color: v(input-color-placeholder);
+      // color: v(input-color-placeholder);
+      @include usevar(color, input-color-placeholder);
     }
 
     // input focused should lighten the menu
     &.--focused {
-      opacity: v(input-focus-opacity);
+      // opacity: v(input-focus-opacity);
+      @include usevar(opacity, input-focus-opacity);
     }
 
     @include screen-sm {
@@ -159,6 +167,7 @@ $writer-radius: $size-half;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include usevar(color, data-color);
   }
 
   .Renderer-name { // input for novel name
@@ -170,6 +179,7 @@ $writer-radius: $size-half;
     // height: $size-2 + 2px; // slight misalign
     height: 100%;
     border-bottom: v(input-bg) solid 2px;
+    @include usevar(border-bottom-color, input-focus-opacity);
     border-radius: $radius;
 
     @include screen-xs {
@@ -179,13 +189,16 @@ $writer-radius: $size-half;
     // @extend %ease;
 
     &:hover {
-      background: v(input-bg-active);
+      // background: v(input-bg-active);
+      @include usevar(background, input-bg-active);
       @extend %ease;
     }
 
     &:focus {
-      background: v(input-bg-active);
+      // background: v(input-bg-active);
+      @include usevar(background, input-bg-active);
       border-bottom: v(input-bg-active) solid 2px;
+      @include usevar(border-bottom-color, input-bg-active);
       @extend %ease;
     }
   }
@@ -193,6 +206,7 @@ $writer-radius: $size-half;
   .Renderer-content {
 
     color: v(writer-color);
+    @include usevar(color, writer-color);
     padding-bottom: 110px; // leave room for the word counter
     text-shadow: none;
 
@@ -209,7 +223,8 @@ $writer-radius: $size-half;
   }
     .Renderer.--zen {
       .Renderer-content {
-        text-shadow: v(writer-zen-shadow);
+        // text-shadow: v(writer-zen-shadow);
+        @include usevar(text-shadow, writer-zen-shadow);
         color: transparent;
       }
     }
@@ -309,31 +324,40 @@ $writer-radius: $size-half;
       font-size: usetheme(input-size, $novelmonkey);
       outline: none;
       box-shadow: none;
-      color: v(input-color);
+      // color: v(input-color);
+      @include usevar(color, input-color);
       border-color: v(input-border);
 
       // @extend %ease;
-      background-color: v(writer-input-bg);
+      // background-color: v(writer-input-bg);
+      @include usevar(background-color, writer-input-bg);
       height: usetheme(input-height, $novelmonkey);
       @extend %ease-fast;
       transition-property: height;
       
       @include input-placeholder {
-        color: v(input-color-placeholder);
+        // color: v(input-color-placeholder);
+        @include usevar(color, input-color-placeholder);
       }
 
       & {
       }
 
       &:hover {
-        background-color: v(input-bg-active);
+        // background-color: v(input-bg-active);
+        @include usevar(background-color, input-bg-active);
         border-color: v(input-border-hover);
+        @include usevar(border-color, input-border-hover);
         @extend %ease-fast;
       }
       &:focus, &:active {
         @extend %ease-fast;
         background-color: v(writer-input-bg) !important;
+        @include usevar(background-color, writer-input-bg);
+
         border-color: v(input-border-active);
+        @include usevar(border-color, input-border-active);
+
         height: usetheme(input-height-active, $novelmonkey);
         box-shadow: none;
         @include input-placeholder {
